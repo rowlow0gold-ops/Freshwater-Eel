@@ -1,0 +1,16 @@
+{
+  "title": "본가민물장어 매장 안내",
+  "subtitle": "60평 이상 대형 매장도 점주님들의 입소문만으로 꾸준히 오픈되고 있습니다.",
+  "items": [
+    { "name": "수원 광교점", "address": "경기도 수원시 영통구 광교중앙로 145",   "image": "https://images.pexels.com/photos/31735995/pexels-photo-31735995.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" },
+    { "name": "부산 광안점", "address": "부산광역시 수영구 광안해변로 219",        "image": "https://images.pexels.com/photos/31663811/pexels-photo-31663811.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" },
+    { "name": "청주 가경점", "address": "충청북도 청주시 흥덕구 가경로 312",        "image": "https://images.pexels.com/photos/239975/pexels-photo-239975.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop"   },
+    { "name": "안산 단원점", "address": "경기도 안산시 단원구 광덕대로 88",         "image": "https://images.pexels.com/photos/9371714/pexels-photo-9371714.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop"  },
+    { "name": "시흥 능곡점", "address": "경기도 시흥시 능곡중앙로 47",              "image": "https://images.pexels.com/photos/5774152/pexels-photo-5774152.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop"  },
+    { "name": "화성 동탄점", "address": "경기도 화성시 동탄순환대로 624",            "image": "https://images.pexels.com/photos/8999080/pexels-photo-8999080.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop"  },
+    { "name": "청주 봉명점", "address": "충청북도 청주시 흥덕구 봉명로 99",          "image": "https://images.pexels.com/photos/31735995/pexels-photo-31735995.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" },
+    { "name": "군산 수송점", "address": "전북특별자치도 군산시 수송로 218",          "image": "https://images.pexels.com/photos/31663811/pexels-photo-31663811.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" },
+    { "name": "익산 영등점", "address": "전북특별자치도 익산시 영등동 731",          "image": "https://images.pexels.com/photos/239975/pexels-photo-239975.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop"   },
+    { "name": "충북 진천점", "address": "충청북도 진천군 진천읍 상산로 1051",         "image": "https://images.pexels.com/photos/9371714/pexels-photo-9371714.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop"  }
+  ]
+}

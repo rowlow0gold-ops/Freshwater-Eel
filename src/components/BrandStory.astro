@@ -1,0 +1,44 @@
+---
+import siteKo from "../data/site.json";
+import siteEn from "../data/en/site.json";
+
+interface Props { lang?: "ko" | "en"; }
+const { lang = "ko" } = Astro.props;
+const site = lang === "en" ? siteEn : siteKo;
+---
+
+<section class="py-24 bg-white">
+  <div class="mx-auto max-w-6xl px-4 grid gap-12 md:grid-cols-2 items-center">
+    <div class="zoom-on-hover reveal rounded-3xl overflow-hidden ring-1 ring-stone-200 shadow-xl">
+      <img
+        src={site.brand.image}
+        alt={site.name}
+        loading="lazy"
+        class="w-full h-full object-cover aspect-[4/3]"
+      />
+    </div>
+    <div>
+      <p class="reveal text-sm tracking-widest text-[var(--color-brand)] font-bold uppercase">
+        EEL HERITAGE FOR THE NEXT 100 YEARS
+      </p>
+      <h2 class="reveal mt-3 text-3xl md:text-4xl font-extrabold text-stone-900 leading-tight">
+        {site.brand.title}
+      </h2>
+      <p class="reveal mt-4 text-lg text-stone-700">{site.brand.subtitle}</p>
+      <p class="reveal mt-2 text-sm text-stone-500">{site.brand.body}</p>
+    </div>
+  </div>
+
+  {site.brand.videoUrl && (
+    <div class="reveal mt-20 aspect-video max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-xl ring-1 ring-stone-200">
+      <iframe
+        src={site.brand.videoUrl}
+        title={lang === "en" ? "Brand video" : "브랜드 소개 영상"}
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        class="w-full h-full"
+      ></iframe>
+    </div>
+  )}
+</section>

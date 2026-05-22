@@ -1,0 +1,87 @@
+---
+import popupKo from "../data/popup.json";
+import popupEn from "../data/en/popup.json";
+
+interface Props {
+  lang?: "ko" | "en";
+}
+const { lang = "ko" } = Astro.props;
+const popup = lang === "en" ? popupEn : popupKo;
+
+const now = new Date();
+const start = popup.startDate ? new Date(popup.startDate) : null;
+const end = popup.endDate ? new Date(popup.endDate) : null;
+const inWindow = (!start || now >= start) && (!end || now <= end);
+const show = popup.enabled && inWindow;
+const p = popup.promo;
+---
+
+{show && (
+  <div
+    data-popup="promo"
+    class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/55 backdrop-blur-sm p-3 md:p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="promo-popup-title"
+  >
+    <div class="relative max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+      <button
+        type="button"
+        data-popup-close
+        aria-label="닫기"
+        class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-stone-600 hover:text-stone-900 hover:bg-white flex items-center justify-center text-xl shadow"
+      >
+        ×
+      </button>
+
+      <!-- Header -->
+      <div class="bg-gradient-to-br from-[var(--color-brand)] to-[var(--color-brand-dark)] text-white px-6 md:px-7 py-6 md:py-7">
+        <p class="text-[10px] md:text-xs tracking-[0.3em] font-bold opacity-90 uppercase">
+          {p.kicker}
+        </p>
+        <h3 id="promo-popup-title" class="mt-1.5 text-xl md:text-2xl font-extrabold leading-tight">
+          {p.title}
+        </h3>
+        {p.subtitle && (
+          <p class="mt-1.5 text-base md:text-lg font-bold text-[var(--color-accent)]">
+            {p.subtitle}
+          </p>
+        )}
+      </div>
+
+      <!-- Body -->
+      <div class="px-6 md:px-7 py-5">
+        <p class="text-sm leading-relaxed text-stone-700 whitespace-pre-line">
+          {p.body}
+        </p>
+        {p.ctaLabel && (
+          <button
+            type="button"
+            data-popup-open={p.ctaOpens || "inquiry"}
+            class="mt-5 inline-flex items-center justify-center w-full rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-bold text-white hover:bg-[var(--color-brand-dark)] transition"
+          >
+            {p.ctaLabel} →
+          </button>
+        )}
+      </div>
+
+      <!-- Footer buttons -->
+      <div class="flex border-t border-stone-200 text-sm">
+        <button
+          type="button"
+          data-popup-hide-1d
+          class="flex-1 py-3 text-stone-600 hover:bg-stone-50 transition"
+        >
+          {lang === "en" ? "Don't show for 24h" : "1일 동안 보지 않음"}
+        </button>
+        <button
+          type="button"
+          data-popup-close
+          class="flex-1 py-3 font-semibold text-[var(--color-brand)] border-l border-stone-200 hover:bg-stone-50 transition"
+        >
+          {lang === "en" ? "Close" : "닫기"}
+        </button>
+      </div>
+    </div>
+  </div>
+)}

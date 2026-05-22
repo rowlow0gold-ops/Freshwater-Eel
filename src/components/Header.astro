@@ -1,0 +1,84 @@
+---
+import siteKo from "../data/site.json";
+import siteEn from "../data/en/site.json";
+
+const path = Astro.url.pathname;
+const isEn = path.startsWith("/en");
+const site = isEn ? siteEn : siteKo;
+
+const nav = [
+  { label: "BRAND", href: "#brand" },
+  { label: "CONCEPT", href: "#concept" },
+  { label: "MENU", href: "#menu" },
+  { label: "STRATEGY", href: "#strategy" },
+  { label: "STORE", href: "#store" },
+  { label: "FRANCHISE", href: "#franchise" },
+];
+---
+
+<header class="site-header sticky top-0 z-40 bg-white/95 backdrop-blur transition-shadow">
+  <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+    <a href={isEn ? "/en/" : "/"} class="flex items-baseline gap-2">
+      <span class="text-xl font-extrabold text-[var(--color-brand)]">{site.name}</span>
+      <span class="hidden sm:inline text-xs tracking-widest text-stone-500">{site.nameEn}</span>
+    </a>
+
+    <nav class="hidden lg:flex gap-7 text-sm font-semibold text-stone-700">
+      {nav.map((n) => (
+        <a href={n.href} class="hover:text-[var(--color-brand)] transition">{n.label}</a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- Language switcher -->
+      <div class="hidden sm:flex items-center gap-1 text-xs font-bold text-stone-500 mr-1">
+        <a
+          href="/"
+          class={`px-2 py-1 rounded ${!isEn ? "bg-stone-900 text-white" : "hover:text-[var(--color-brand)]"}`}
+        >KO</a>
+        <a
+          href="/en/"
+          class={`px-2 py-1 rounded ${isEn ? "bg-stone-900 text-white" : "hover:text-[var(--color-brand)]"}`}
+        >EN</a>
+      </div>
+
+      <a
+        href={`tel:${site.phone}`}
+        class="hidden sm:inline-block rounded-full bg-[var(--color-brand)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--color-brand-dark)] transition whitespace-nowrap"
+      >
+        {site.phoneLabel} {site.phone}
+      </a>
+      <button
+        type="button"
+        data-mobile-toggle
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-stone-300 text-stone-700"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <line x1="4" y1="6" x2="20" y2="6"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="18" x2="20" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-nav" data-mobile-panel class="lg:hidden hidden border-t border-stone-200 bg-white">
+    <nav class="mx-auto max-w-7xl px-4 py-3 grid gap-1 text-base font-semibold text-stone-700">
+      {nav.map((n) => (
+        <a href={n.href} class="rounded px-2 py-2 hover:bg-stone-100">{n.label}</a>
+      ))}
+      <div class="flex gap-2 mt-2 text-xs font-bold">
+        <a href="/"    class={`flex-1 px-3 py-2 rounded text-center ${!isEn ? "bg-stone-900 text-white" : "bg-stone-100"}`}>KO</a>
+        <a href="/en/" class={`flex-1 px-3 py-2 rounded text-center ${isEn ? "bg-stone-900 text-white" : "bg-stone-100"}`}>EN</a>
+      </div>
+      <a
+        href={`tel:${site.phone}`}
+        class="mt-2 rounded-full bg-[var(--color-brand)] px-4 py-2 text-center text-white"
+      >
+        {site.phoneLabel} {site.phone}
+      </a>
+    </nav>
+  </div>
+</header>

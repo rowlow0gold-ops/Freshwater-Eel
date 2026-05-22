@@ -1,0 +1,51 @@
+{
+  "title": "Bonga Eel franchise overview",
+  "subtitle": "HQ focuses on long-term franchise care — we want to grow with you for the next 10 years.",
+  "pillars": ["Hands-on care", "Operational support", "Growth strategy"],
+  "costs": [
+    { "group": "Standard",  "item": "Franchise fee",   "original": "₩8,000,000",                "applied": "Contact HQ"  },
+    { "group": "Standard",  "item": "Training fee",    "original": "₩3,000,000",                "applied": "Contact HQ"  },
+    { "group": "Standard",  "item": "Royalty",         "original": "3% / month",                "applied": "Contact HQ"  },
+    { "group": "Standard",  "item": "POP",             "original": "₩2,000,000",                "applied": "Negotiable"  },
+    { "group": "Standard",  "item": "POS",             "original": "",                          "applied": "Contact HQ"  },
+    { "group": "Optional",  "item": "Interior",        "original": "₩1,800,000 / 3.3㎡",        "applied": "Self-build"  },
+    { "group": "Optional",  "item": "Signage",         "original": "₩8,500,000",                "applied": "Self-build"  },
+    { "group": "Optional",  "item": "Kitchen equipment","original": "",                         "applied": "Self-source" },
+    { "group": "Optional",  "item": "FOH equipment",   "original": "",                          "applied": "Self-source" }
+  ],
+  "promotions": [
+    {
+      "label": "Stores #16 – #25",
+      "status": "Open now",
+      "benefits": [
+        { "item": "Franchise fee", "original": "₩8,000,000",  "applied": "Contact HQ" },
+        { "item": "Training fee",  "original": "₩3,000,000",  "applied": "Contact HQ" },
+        { "item": "Deposit",       "original": "₩15,000,000", "applied": "Waived"     },
+        { "item": "Audit fee",     "original": "₩200,000",    "applied": "Waived"     },
+        { "item": "Royalty",       "original": "3% / month",  "applied": "Contact HQ" }
+      ]
+    },
+    {
+      "label": "Stores #06 – #15",
+      "status": "Filled",
+      "benefits": [
+        { "item": "Franchise fee", "original": "₩8,000,000",  "applied": "Contact HQ" },
+        { "item": "Training fee",  "original": "₩3,000,000",  "applied": "Contact HQ" },
+        { "item": "Deposit",       "original": "₩15,000,000", "applied": "Waived"     },
+        { "item": "Audit fee",     "original": "₩200,000",    "applied": "Waived"     },
+        { "item": "Royalty",       "original": "3% / month",  "applied": "Waived"     }
+      ]
+    },
+    {
+      "label": "Stores #01 – #05",
+      "status": "Filled",
+      "benefits": [
+        { "item": "Franchise fee", "original": "₩8,000,000",  "applied": "Waived" },
+        { "item": "Training fee",  "original": "₩3,000,000",  "applied": "Waived" },
+        { "item": "Deposit",       "original": "₩15,000,000", "applied": "Waived" },
+        { "item": "Audit fee",     "original": "₩200,000",    "applied": "Waived" },
+        { "item": "Royalty",       "original": "3% / month",  "applied": "Waived" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+---
+import popupKo from "../data/popup.json";
+import popupEn from "../data/en/popup.json";
+import siteKo from "../data/site.json";
+import siteEn from "../data/en/site.json";
+
+interface Props {
+  lang?: "ko" | "en";
+}
+const { lang = "ko" } = Astro.props;
+const popup = (lang === "en" ? popupEn : popupKo).inquiry;
+const site = lang === "en" ? siteEn : siteKo;
+const t = lang === "en";
+
+const countries = [
+  { code: "KR", labelKo: "대한민국", labelEn: "Republic of Korea" },
+  { code: "JP", labelKo: "일본", labelEn: "Japan" },
+  { code: "CN", labelKo: "중국", labelEn: "China" },
+  { code: "TW", labelKo: "대만", labelEn: "Taiwan" },
+  { code: "HK", labelKo: "홍콩", labelEn: "Hong Kong" },
+  { code: "SG", labelKo: "싱가포르", labelEn: "Singapore" },
+  { code: "MY", labelKo: "말레이시아", labelEn: "Malaysia" },
+  { code: "TH", labelKo: "태국", labelEn: "Thailand" },
+  { code: "VN", labelKo: "베트남", labelEn: "Vietnam" },
+  { code: "ID", labelKo: "인도네시아", labelEn: "Indonesia" },
+  { code: "PH", labelKo: "필리핀", labelEn: "Philippines" },
+  { code: "US", labelKo: "미국", labelEn: "United States" },
+  { code: "CA", labelKo: "캐나다", labelEn: "Canada" },
+  { code: "GB", labelKo: "영국", labelEn: "United Kingdom" },
+  { code: "DE", labelKo: "독일", labelEn: "Germany" },
+  { code: "FR", labelKo: "프랑스", labelEn: "France" },
+  { code: "AU", labelKo: "호주", labelEn: "Australia" },
+  { code: "NZ", labelKo: "뉴질랜드", labelEn: "New Zealand" },
+  { code: "AE", labelKo: "아랍에미리트", labelEn: "United Arab Emirates" },
+  { code: "SA", labelKo: "사우디아라비아", labelEn: "Saudi Arabia" },
+  { code: "OTHER", labelKo: "기타", labelEn: "Other" },
+];
+
+const types = [
+  { value: "domestic-franchise",      labelKo: "국내 가맹 창업 문의",   labelEn: "Domestic franchise inquiry" },
+  { value: "international-franchise", labelKo: "해외 마스터 / 가맹 문의", labelEn: "International master franchise" },
+  { value: "partnership",             labelKo: "업무제휴 및 협업",       labelEn: "Business partnership" },
+  { value: "disclosure",              labelKo: "정보 공개서 신청",       labelEn: "Information disclosure request" },
+  { value: "other",                   labelKo: "기타 문의",              labelEn: "Other" },
+];
+---
+
+<div
+  data-popup="inquiry"
+  class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/55 backdrop-blur-sm p-3 md:p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="inquiry-popup-title"
+>
+  <div class="relative max-w-xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+    <button
+      type="button"
+      data-popup-close
+      aria-label={t ? "Close" : "닫기"}
+      class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 text-stone-600 hover:text-stone-900 hover:bg-white flex items-center justify-center text-xl shadow"
+    >
+      ×
+    </button>
+
+    <!-- Header -->
+    <div class="bg-gradient-to-br from-[var(--color-brand)] to-[var(--color-brand-dark)] text-white px-6 md:px-7 py-6 md:py-7 shrink-0">
+      <p class="text-[10px] md:text-xs tracking-[0.3em] font-bold opacity-90 uppercase">
+        {popup.kicker}
+      </p>
+      <h3 id="inquiry-popup-title" class="mt-1.5 text-xl md:text-2xl font-extrabold leading-tight">
+        {popup.title}
+      </h3>
+      {popup.subtitle && (
+        <p class="mt-1.5 text-base md:text-lg font-bold text-[var(--color-accent)]">
+          {popup.subtitle}
+        </p>
+      )}
+      <p class="mt-2 text-xs md:text-sm text-white/90 leading-relaxed whitespace-pre-line">
+        {popup.body}
+      </p>
+    </div>
+
+    <!-- Scrollable form body -->
+    <div class="flex-1 overflow-y-auto px-6 md:px-7 py-5">
+      <!-- Proposal download -->
+      {popup.proposalHref && (
+        <a
+          href={popup.proposalHref}
+          target="_blank"
+          rel="noopener"
+          class="mb-5 flex items-center gap-3 rounded-xl bg-stone-50 border border-stone-200 px-4 py-3 hover:border-[var(--color-brand)] hover:bg-white transition group"
+        >
+          <span class="inline-flex w-9 h-9 items-center justify-center rounded-full bg-[var(--color-brand)] text-white shrink-0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+          </span>
+          <span class="flex-1 leading-tight">
+            <span class="block text-sm font-bold text-stone-900">{popup.proposalLabel}</span>
+            <span class="block text-[11px] text-stone-500">PDF · {t ? "Save for later" : "다운로드"}</span>
+          </span>
+          <span class="text-stone-400 group-hover:text-[var(--color-brand)] transition">→</span>
+        </a>
+      )}
+
+      <form
+        data-inquiry-form
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        class="grid gap-4"
+      >
+        <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+        <input type="hidden" name="subject" value="[본가민물장어] 신규 사업 문의" />
+        <input type="hidden" name="from_name" value="bonga-eel.site" />
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <div class="grid gap-3 sm:grid-cols-2">
+          <label class="grid gap-1 text-xs font-semibold text-stone-700">
+            {t ? "Name" : "이름 / Name"}
+            <input
+              type="text"
+              name="name"
+              required
+              class="rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal text-stone-900 focus:outline-none focus:border-[var(--color-brand)]"
+              placeholder={t ? "John Doe" : "홍길동 / John Doe"}
+            />
+          </label>
+          <label class="grid gap-1 text-xs font-semibold text-stone-700">
+            {t ? "Country" : "국가 / Country"}
+            <select
+              name="country"
+              required
+              class="rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal text-stone-900 focus:outline-none focus:border-[var(--color-brand)]"
+            >
+              {countries.map((c) => (
+                <option value={c.code}>{t ? c.labelEn : `${c.labelKo} / ${c.labelEn}`}</option>
+              ))}
+            </select>
+          </label>
+          <label class="grid gap-1 text-xs font-semibold text-stone-700">
+            {t ? "Phone" : "연락처 / Phone"}
+            <input
+              type="tel"
+              name="phone"
+              required
+              class="rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal text-stone-900 focus:outline-none focus:border-[var(--color-brand)]"
+              placeholder="+82 10-1234-5678"
+            />
+          </label>
+          <label class="grid gap-1 text-xs font-semibold text-stone-700">
+            {t ? "Email" : "이메일 / Email"}
+            <input
+              type="email"
+              name="email"
+              required
+              class="rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal text-stone-900 focus:outline-none focus:border-[var(--color-brand)]"
+              placeholder="name@example.com"
+            />
+          </label>
+        </div>
+
+        <label class="grid gap-1 text-xs font-semibold text-stone-700">
+          {t ? "Inquiry type" : "문의 유형 / Inquiry type"}
+          <select
+            name="type"
+            required
+            class="rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal text-stone-900 focus:outline-none focus:border-[var(--color-brand)]"
+          >
+            {types.map((ty) => (
+              <option value={ty.value}>{t ? ty.labelEn : `${ty.labelKo} · ${ty.labelEn}`}</option>
+            ))}
+          </select>
+        </label>
+
+        <label class="grid gap-1 text-xs font-semibold text-stone-700">
+          {t ? "Message" : "내용 / Message"}
+          <textarea
+            name="message"
+            rows="4"
+            required
+            class="rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal text-stone-900 focus:outline-none focus:border-[var(--color-brand)] resize-none"
+            placeholder={t
+              ? "Tell us about your region, plans, and questions."
+              : "검토 중인 지역, 운영 계획, 문의 내용을 자유롭게 적어주세요."}
+          ></textarea>
+        </label>
+
+        <label class="flex items-start gap-2 text-[11px] text-stone-500">
+          <input type="checkbox" required class="mt-0.5" />
+          <span>
+            {t ? "I agree to the " : "개인정보처리방침에 동의합니다. / I agree to the "}
+            <button type="button" data-popup-open="privacy" class="underline text-[var(--color-brand)] hover:text-[var(--color-brand-dark)]">
+              {t ? "privacy policy" : "개인정보처리방침"}
+            </button>
+            .
+          </span>
+        </label>
+
+        <button
+          type="submit"
+          class="rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-bold text-white hover:bg-[var(--color-brand-dark)] transition"
+        >
+          {t ? "Send inquiry" : "문의 보내기 / Send inquiry"}
+        </button>
+
+        <p data-inquiry-status class="hidden text-xs font-semibold"></p>
+      </form>
+    </div>
+
+    <!-- Footer button (no hide-1d) -->
+    <div class="flex border-t border-stone-200 text-sm shrink-0">
+      <button
+        type="button"
+        data-popup-close
+        class="flex-1 py-3 font-semibold text-[var(--color-brand)] hover:bg-stone-50 transition"
+      >
+        {t ? "Close" : "닫기"}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+{
+  "terms": {
+    "title": "Terms of Service",
+    "subtitle": "Bonga Eel (bonga-eel.site) Website Terms",
+    "updated": "Effective May 22, 2026",
+    "sections": [
+      {
+        "heading": "1. Purpose",
+        "body": "These Terms govern the access to and use of the Bonga Eel official website (bonga-eel.site, the “Site”) operated by Bonga Food Co., Ltd. (“Company”), including the rights, obligations, and responsibilities of the Company and visitors."
+      },
+      {
+        "heading": "2. Scope of Service",
+        "body": "The Site provides information about the Bonga Eel brand and franchise business, including menu, store, opening guidance, and inquiry intake. All content on the Site is owned by the Company or its content providers and may not be reproduced, redistributed, or modified without permission."
+      },
+      {
+        "heading": "3. User Obligations",
+        "body": "Users must comply with applicable law, these Terms, and any notices posted on the Site. The following actions are prohibited:\n1. Interfering with the normal operation of the Site.\n2. Misappropriating others' information or submitting false information.\n3. Infringing the Company's intellectual property rights."
+      },
+      {
+        "heading": "4. Limitation of Liability",
+        "body": "The Company is not liable for service interruptions caused by force majeure or telecom failures. Information posted on the Site may change without prior notice."
+      },
+      {
+        "heading": "5. Governing Law",
+        "body": "Matters not covered by these Terms shall be governed by the laws and customs of the Republic of Korea. Any dispute arising from use of the Site shall be subject to the court having jurisdiction over the Company's principal office."
+      }
+    ]
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "subtitle": "Bonga Eel (bonga-eel.site) Privacy Policy",
+    "updated": "Effective May 22, 2026",
+    "sections": [
+      {
+        "heading": "1. Personal Information We Collect",
+        "body": "The Company collects the following personal information to handle business inquiries:\n• Required: name, country, phone number, email, inquiry type, message\n• Automatically collected: IP address, access time, browser info (for service quality improvement)"
+      },
+      {
+        "heading": "2. Purpose of Collection and Use",
+        "body": "Collected information is used solely for the following purposes:\n• Responding to domestic, partnership, and international master franchise inquiries\n• Sending franchise proposal and related materials\n• Site operation statistics and service quality improvement"
+      },
+      {
+        "heading": "3. Retention Period",
+        "body": "Personal information is destroyed without delay once its purpose has been fulfilled. Where retention is required by law, it will be stored for the period specified by that law."
+      },
+      {
+        "heading": "4. Third-Party Sharing & Processing",
+        "body": "The Company does not share user information with third parties without consent. Inquiry intake is processed through Web3Forms, which receives only the inquiry content securely."
+      },
+      {
+        "heading": "5. Your Rights",
+        "body": "You may request access, correction, deletion, or suspension of processing of your personal information at any time. Requests are handled without undue delay."
+      },
+      {
+        "heading": "6. Data Protection Officer",
+        "body": "Name: Jeongmin Lee\nEmail: global@bongafood.co.kr\nPhone: +82-1577-3214"
+      }
+    ]
+  }
+}

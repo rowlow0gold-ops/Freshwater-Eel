@@ -1,0 +1,8 @@
+{
+  "title": "Bonga Eel franchise support",
+  "items": [
+    { "category": "Site development", "text": "Seoul Gangseo / Busan Haeundae sites under development" },
+    { "category": "Opened",           "text": "Suwon Gwanggyo flagship & Busan Gwangan locations now open" },
+    { "category": "Award",            "text": "2025 F&B Trusted Brand Award", "link": "https://example.com/news/2025-bonga-award" }
+  ]
+}

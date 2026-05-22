@@ -1,0 +1,48 @@
+---
+import salesKo from "../data/sales.json";
+import salesEn from "../data/en/sales.json";
+import siteKo from "../data/site.json";
+import siteEn from "../data/en/site.json";
+
+interface Props { lang?: "ko" | "en"; }
+const { lang = "ko" } = Astro.props;
+const sales = lang === "en" ? salesEn : salesKo;
+const site = lang === "en" ? siteEn : siteKo;
+const peakLabel = lang === "en" ? "peak daily revenue" : "최고 일매출";
+---
+
+<section class="relative py-24 overflow-hidden bg-[var(--color-cream)]">
+  <!-- Subtle background photo -->
+  <div class="absolute inset-0">
+    <div
+      data-parallax
+      data-parallax-speed="0.08"
+      class="absolute inset-0 -top-16 -bottom-16 bg-cover bg-center opacity-15"
+      style={`background-image: url(${site.salesBg})`}
+    ></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-cream)] via-[var(--color-cream)]/90 to-[var(--color-cream)]"></div>
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-6xl px-4">
+    <h2 class="reveal text-3xl md:text-4xl font-extrabold text-center text-stone-900">
+      {sales.title}
+    </h2>
+    <p class="reveal mt-4 text-center text-stone-600 max-w-2xl mx-auto">
+      {sales.subtitle}
+    </p>
+    <p class="reveal mt-2 text-center text-sm font-semibold text-[var(--color-brand)] tracking-widest">
+      {sales.label}
+    </p>
+
+    <div data-reveal-children class="mt-12 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {sales.records.map((r) => (
+        <div class="lift rounded-2xl bg-white border border-stone-200 p-5 text-center shadow-sm">
+          <p class="text-2xl md:text-3xl font-extrabold text-[var(--color-brand)] tabular-nums">
+            <span data-count-up={r.amount}>0</span>
+          </p>
+          <p class="mt-2 text-sm text-stone-600">{r.store} {peakLabel}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

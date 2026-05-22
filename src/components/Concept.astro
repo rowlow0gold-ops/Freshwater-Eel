@@ -1,0 +1,82 @@
+---
+import conceptKo from "../data/concept.json";
+import conceptEn from "../data/en/concept.json";
+
+interface Props { lang?: "ko" | "en"; }
+const { lang = "ko" } = Astro.props;
+const concept = lang === "en" ? conceptEn : conceptKo;
+---
+
+<section id="concept" class="py-24 bg-[var(--color-cream)]">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="reveal text-3xl md:text-4xl font-extrabold text-center text-stone-900">
+      {concept.title}
+    </h2>
+    <p class="reveal mt-4 text-center text-stone-600 max-w-2xl mx-auto">
+      {concept.subtitle}
+    </p>
+
+    <!-- Highlight photo cards -->
+    <div data-reveal-children class="mt-16 grid gap-6 md:grid-cols-3">
+      {concept.highlights.map((h) => (
+        <div class="lift zoom-on-hover relative rounded-2xl overflow-hidden aspect-[4/5] shadow-md">
+          <img
+            src={h.image}
+            alt={h.name}
+            loading="lazy"
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/30 to-transparent"></div>
+          <div class="absolute inset-x-0 bottom-0 p-6 text-white">
+            <h3 class="text-2xl font-extrabold text-[var(--color-accent)]">{h.name}</h3>
+            <p class="mt-1 text-stone-100">{h.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- 4-pillar icon cards (abstract concepts — no photos) -->
+    <div data-reveal-children class="mt-16 grid gap-4 md:grid-cols-4">
+      {concept.items.map((item, i) => (
+        <div class="lift rounded-2xl bg-white ring-1 ring-stone-200 p-6 aspect-square flex flex-col items-center justify-center text-center">
+          <div class="inline-flex w-16 h-16 items-center justify-center rounded-full bg-[var(--color-brand)]/10 text-[var(--color-brand)]">
+            {i === 0 && (
+              /* trending up — long-term growth */
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                <polyline points="17 6 23 6 23 12"/>
+              </svg>
+            )}
+            {i === 1 && (
+              /* shield-check — stable revenue */
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <polyline points="9 12 11 14 15 10"/>
+              </svg>
+            )}
+            {i === 2 && (
+              /* gear — easy operation */
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+            )}
+            {i === 3 && (
+              /* trophy — proven success */
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                <path d="M4 22h16"/>
+                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+              </svg>
+            )}
+          </div>
+          <h3 class="mt-4 text-base md:text-lg font-bold text-stone-900">{item.name}</h3>
+          <p class="mt-2 text-xs md:text-sm text-stone-600">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import BrandStory from "../components/BrandStory.astro";
+import Concept from "../components/Concept.astro";
+import Menu from "../components/Menu.astro";
+import Strategy from "../components/Strategy.astro";
+import Sales from "../components/Sales.astro";
+import Promo from "../components/Promo.astro";
+import Store from "../components/Store.astro";
+import Franchise from "../components/Franchise.astro";
+import Notice from "../components/Notice.astro";
+import Footer from "../components/Footer.astro";
+import PromoPopup from "../components/PromoPopup.astro";
+import InquiryPopup from "../components/InquiryPopup.astro";
+import InfoPopup from "../components/InfoPopup.astro";
+import FloatingCTA from "../components/FloatingCTA.astro";
+import StickyBottomBar from "../components/StickyBottomBar.astro";
+---
+
+<Layout>
+  <Header />
+  <main>
+    <Hero />
+    <BrandStory />
+    <Concept />
+    <Menu />
+    <Strategy />
+    <Sales />
+    <Promo />
+    <Store />
+    <Franchise />
+    <Notice />
+  </main>
+  <Footer />
+  <PromoPopup />
+  <InquiryPopup />
+  <InfoPopup name="terms" />
+  <InfoPopup name="privacy" />
+  <FloatingCTA />
+  <StickyBottomBar />
+</Layout>

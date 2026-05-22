@@ -1,0 +1,55 @@
+{
+  "name": "본가민물장어",
+  "nameEn": "BONGA EEL",
+  "tagline": "프리미엄 무한리필 장어 전문점",
+  "description": "본가민물장어는 손질된 프리미엄 민물장어와 한우 등심·갈비살·흑돼지 삼겹살·왕새우까지 다양한 무한리필 먹거리를 제공하는 가족형 장어 전문 프랜차이즈입니다.",
+  "phone": "1577-3214",
+  "phoneLabel": "창업문의",
+  "sms": "010-2848-7621",
+  "email": "bonga-eel@bongafood.co.kr",
+  "kakaoChannelUrl": "https://pf.kakao.com/_REPLACE_WITH_CHANNEL",
+  "instagramUrl": "https://www.instagram.com/bonga_eel",
+  "web3formsAccessKey": "REPLACE_WITH_YOUR_WEB3FORMS_KEY",
+  "mapEmbedUrl": "https://www.google.com/maps?q=%EC%88%98%EC%9B%90%EC%8B%9C+%EC%98%81%ED%86%B5%EA%B5%AC+%EA%B4%91%EA%B5%90%EC%A4%91%EC%95%99%EB%A1%9C+145&output=embed",
+  "company": {
+    "name": "본가푸드(주)",
+    "ceo": "김본가",
+    "bizId": "000-00-00000",
+    "headOffice": "수원시 영통구 광교중앙로 145",
+    "logistics": "경기도 평택시 청북읍 청북중앙로 87, 102호",
+    "privacyOfficer": "이정민"
+  },
+  "hero": {
+    "kicker": "EEL HERITAGE FOR THE NEXT 100 YEARS",
+    "title": "본가의 정성으로\n3대를 이어온\n민물장어",
+    "subtitle": "안정적 매출과 셀프형 간편운영으로 가맹점 성공창업을 지원합니다",
+    "ctaLabel": "창업문의 1577-3214",
+    "ctaHref": "tel:1577-3214",
+    "promoBanner": "25호점 한정 신규창업 · 업종변경 파격혜택 프로모션 진행중",
+    "bgImage": "https://images.pexels.com/photos/16569756/pexels-photo-16569756.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1200&fit=crop",
+    "bgVideoIntervalMs": 10000,
+    "bgVideos": [
+      "https://videos.pexels.com/video-files/34029351/14433062_1920_1080_24fps.mp4",
+      "https://videos.pexels.com/video-files/4328587/4328587-uhd_2560_1440_30fps.mp4",
+      "https://videos.pexels.com/video-files/11422269/11422269-uhd_2560_1440_60fps.mp4",
+      "https://videos.pexels.com/video-files/20082249/20082249-uhd_2560_1440_30fps.mp4"
+    ]
+  },
+  "brand": {
+    "title": "탄탄한 4년을 기반으로 든든한 10년을 함께 합니다",
+    "subtitle": "정직한 품질, 흔들리지 않는 브랜드 파워",
+    "body": "2023년 본가민물장어는 수원 광교 본점을 시작으로 전국 18개소 가맹점과 함께하고 있습니다.",
+    "videoUrl": "https://www.youtube.com/embed/KHL5JDi33V0",
+    "image": "https://images.pexels.com/photos/19981737/pexels-photo-19981737.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop"
+  },
+  "promo": {
+    "kicker": "LIMITED OFFER",
+    "title": "25호점 한정 창업혜택",
+    "body": "신규창업·업종변경 가맹점 대상으로 가맹비·보증금·감리비 면제 프로모션을 진행합니다. 본가민물장어 가맹 본사로 문의 주세요.",
+    "ctaLabel": "창업문의 1577-3214",
+    "ctaHref": "tel:1577-3214",
+    "bgImage": "https://images.pexels.com/photos/16569755/pexels-photo-16569755.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop"
+  },
+  "salesBg": "https://images.pexels.com/photos/16569753/pexels-photo-16569753.jpeg?auto=compress&cs=tinysrgb&w=1920&h=900&fit=crop",
+  "ctaBg": "https://images.pexels.com/photos/16569754/pexels-photo-16569754.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop"
+}

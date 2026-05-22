@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "startDate": "",
+  "endDate": "",
+  "promo": {
+    "kicker": "LIMITED OFFER",
+    "title": "25호점 한정 창업혜택",
+    "subtitle": "신규창업 · 업종변경 가맹점 혜택",
+    "body": "가맹비 · 보증금 · 감리비 면제 프로모션을 진행합니다.\n자세한 사항은 본가민물장어 가맹 본사로 문의 주세요.",
+    "ctaLabel": "지금 문의하기",
+    "ctaOpens": "inquiry"
+  },
+  "inquiry": {
+    "kicker": "Business Inquiry",
+    "title": "사업 문의",
+    "subtitle": "국내·해외 가맹 / 제휴 문의",
+    "body": "International master franchise & domestic inquiry — we reply within 2 business days.\n영업일 기준 2일 이내 회신드립니다.",
+    "proposalLabel": "창업 제안서 PDF 다운로드",
+    "proposalHref": "/files/bonga-eel-proposal.pdf"
+  }
+}

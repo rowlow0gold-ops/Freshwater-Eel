@@ -1,0 +1,61 @@
+---
+import noticesKo from "../data/notices.json";
+import noticesEn from "../data/en/notices.json";
+import siteKo from "../data/site.json";
+import siteEn from "../data/en/site.json";
+
+interface Props { lang?: "ko" | "en"; }
+const { lang = "ko" } = Astro.props;
+const notices = lang === "en" ? noticesEn : noticesKo;
+const site = lang === "en" ? siteEn : siteKo;
+
+const phoneLabel  = lang === "en" ? "Main line" : "대표번호";
+const emailLabel  = lang === "en" ? "Email"     : "이메일";
+const articleCta  = lang === "en" ? "Read article →" : "기사보기 →";
+---
+
+<section id="notice" class="py-24 bg-white">
+  <div class="mx-auto max-w-4xl px-4">
+    <h2 class="reveal text-3xl md:text-4xl font-extrabold text-center text-stone-900">
+      {notices.title}
+    </h2>
+
+    <div data-reveal-children class="mt-12 grid gap-3 sm:grid-cols-2 mb-12">
+      <div class="rounded-xl bg-[var(--color-cream)] p-5">
+        <p class="text-xs text-stone-500 font-semibold uppercase tracking-widest">{phoneLabel}</p>
+        <a href={`tel:${site.phone}`} class="mt-1 block text-xl font-bold text-[var(--color-brand)]">
+          {site.phone}
+        </a>
+      </div>
+      <div class="rounded-xl bg-[var(--color-cream)] p-5">
+        <p class="text-xs text-stone-500 font-semibold uppercase tracking-widest">{emailLabel}</p>
+        <a href={`mailto:${site.email}`} class="mt-1 block text-xl font-bold text-stone-800 break-all">
+          {site.email}
+        </a>
+      </div>
+    </div>
+
+    <div data-reveal-children class="rounded-2xl border border-stone-200 overflow-hidden">
+      {notices.items.map((n, i) => (
+        <div
+          class={`flex items-center gap-4 px-5 py-4 ${i > 0 ? "border-t border-stone-200" : ""}`}
+        >
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-stone-900 text-white whitespace-nowrap">
+            {n.category}
+          </span>
+          <span class="flex-1 text-sm text-stone-700">{n.text}</span>
+          {n.link && (
+            <a
+              href={n.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-xs font-semibold text-[var(--color-brand)] hover:underline whitespace-nowrap"
+            >
+              {articleCta}
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

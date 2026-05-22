@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+:root {
+  --color-brand:      #b8341f;
+  --color-brand-dark: #6f1d11;
+  --color-accent:     #f5b835;
+  --color-ink:        #161312;
+  --color-cream:      #fbf6ee;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, sans-serif;
+  color: var(--color-ink);
+}
+
+/* ---- Scroll reveal ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-reveal-children] > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+[data-reveal-children].is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-reveal-children].is-visible > *:nth-child(1) { transition-delay: 0ms; }
+[data-reveal-children].is-visible > *:nth-child(2) { transition-delay: 80ms; }
+[data-reveal-children].is-visible > *:nth-child(3) { transition-delay: 160ms; }
+[data-reveal-children].is-visible > *:nth-child(4) { transition-delay: 240ms; }
+[data-reveal-children].is-visible > *:nth-child(5) { transition-delay: 320ms; }
+[data-reveal-children].is-visible > *:nth-child(6) { transition-delay: 400ms; }
+[data-reveal-children].is-visible > *:nth-child(7) { transition-delay: 480ms; }
+[data-reveal-children].is-visible > *:nth-child(8) { transition-delay: 560ms; }
+
+/* ---- Sticky header ---- */
+.site-header.is-scrolled {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  background-color: rgba(255, 255, 255, 0.96);
+}
+
+/* ---- Marquee promo banner ---- */
+.marquee { position: relative; overflow: hidden; }
+.marquee-track {
+  display: inline-flex;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: marquee-scroll 30s linear infinite;
+  will-change: transform;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+/* ---- Hero wave at bottom ---- */
+.hero-waves {
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+@media (min-width: 768px) {
+  .hero-waves { height: 110px; }
+}
+.hero-waves use {
+  animation: move-wave 9s -2s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+.hero-waves use:nth-child(2) { animation-duration: 11s; animation-delay: -3s; }
+.hero-waves use:nth-child(3) { animation-duration: 14s; animation-delay: -4s; }
+.hero-waves use:nth-child(4) { animation-duration: 20s; animation-delay: -5s; }
+@keyframes move-wave {
+  0%   { transform: translate3d(-90px, 0, 0); }
+  100% { transform: translate3d(85px, 0, 0); }
+}
+
+/* ---- Parallax ---- */
+[data-parallax] { will-change: transform; }
+
+/* ---- Card hover lift + image zoom ---- */
+.lift { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+.lift:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12); }
+.zoom-on-hover { overflow: hidden; }
+.zoom-on-hover img { transition: transform 0.7s ease; }
+.zoom-on-hover:hover img { transform: scale(1.08); }
+
+/* ---- Menu tab fade ---- */
+.tab-panel { opacity: 0; transition: opacity 0.4s ease; pointer-events: none; }
+.tab-panel.is-active { opacity: 1; pointer-events: auto; }
+
+/* ---- CTA pulse ---- */
+@keyframes soft-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184, 52, 31, 0.55); }
+  50%      { box-shadow: 0 0 0 14px rgba(184, 52, 31, 0); }
+}
+.pulse { animation: soft-pulse 2.2s ease-out infinite; }
+
+/* ---- Popup modal ---- */
+[data-popup] {
+  animation: popup-fade 0.35s ease-out;
+}
+[data-popup] > div {
+  animation: popup-pop 0.4s cubic-bezier(0.22, 1.4, 0.42, 1);
+}
+@keyframes popup-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes popup-pop {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---- Sticky bottom bar safe-area + body offset ---- */
+.sticky-bar { padding-bottom: env(safe-area-inset-bottom); }
+/* Reserve space at the bottom of the page so content isn't hidden behind the sticky bar. */
+body { padding-bottom: 76px; }
+@media (min-width: 640px) { body { padding-bottom: 84px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, [data-reveal-children] > *, .zoom-on-hover img, .lift,
+  .marquee-track, .pulse, .hero-waves use, [data-popup], [data-popup] > div {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

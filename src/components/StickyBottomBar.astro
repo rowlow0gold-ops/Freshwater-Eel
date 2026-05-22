@@ -1,0 +1,39 @@
+---
+import siteKo from "../data/site.json";
+import siteEn from "../data/en/site.json";
+
+const isEn = Astro.url.pathname.startsWith("/en");
+const site = isEn ? siteEn : siteKo;
+const ctaLabel = isEn ? "Talk to franchise" : "창업상담";
+---
+
+<!-- Visible on ALL screen sizes (mobile + desktop) -->
+<div
+  class="sticky-bar fixed inset-x-0 bottom-0 z-40 bg-white border-t border-stone-200 shadow-[0_-6px_18px_rgba(0,0,0,0.12)]"
+>
+  <div class="mx-auto max-w-6xl px-3 py-2.5 flex items-center justify-between gap-3">
+    <div class="hidden sm:flex flex-col leading-tight">
+      <span class="text-[10px] tracking-[0.2em] uppercase text-stone-400 font-bold">
+        Call now
+      </span>
+      <span class="text-xl md:text-2xl font-extrabold text-stone-900">
+        {ctaLabel}
+      </span>
+    </div>
+
+    <a
+      href={`tel:${site.phone}`}
+      class="flex-1 sm:flex-none flex items-center justify-center gap-3 rounded-full bg-[var(--color-brand)] text-white px-5 sm:px-7 py-3 font-extrabold hover:bg-[var(--color-brand-dark)] transition shadow-md"
+      aria-label={`${ctaLabel} ${site.phone}`}
+    >
+      <span class="inline-flex w-8 h-8 items-center justify-center rounded-full bg-white/20">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/>
+        </svg>
+      </span>
+      <span class="whitespace-nowrap text-sm md:text-base">
+        {ctaLabel} {site.phone}
+      </span>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+{
+  "title": "온 가족이 즐기는 본가의 한 상",
+  "subtitle": "프리미엄 장어부터 한우·흑돼지·왕새우까지, 사이드와 후식까지 든든하게 즐기세요.",
+  "categories": [
+    {
+      "name": "대표메뉴",
+      "items": [
+        { "name": "프리미엄 민물장어", "image": "https://images.pexels.com/photos/16569756/pexels-photo-16569756.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "흑돼지 삼겹살",     "image": "https://images.pexels.com/photos/5338143/pexels-photo-5338143.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "미국산 등심",       "image": "https://images.pexels.com/photos/1109024/pexels-photo-1109024.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "미국산 갈비살",     "image": "https://images.pexels.com/photos/19998454/pexels-photo-19998454.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "차돌 우삼겹",       "image": "https://images.pexels.com/photos/5774145/pexels-photo-5774145.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "왕새우",           "image": "https://images.pexels.com/photos/1998920/pexels-photo-1998920.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" }
+      ]
+    },
+    {
+      "name": "점심특선",
+      "items": [
+        { "name": "장어 두루치기", "image": "https://images.pexels.com/photos/37290960/pexels-photo-37290960.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "장어 솥밥",     "image": "https://images.pexels.com/photos/31652600/pexels-photo-31652600.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "장어 매운탕",   "image": "https://images.pexels.com/photos/34992219/pexels-photo-34992219.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" }
+      ]
+    },
+    {
+      "name": "후식메뉴",
+      "items": [
+        { "name": "평양식 비빔냉면", "image": "https://images.pexels.com/photos/8980454/pexels-photo-8980454.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop"   },
+        { "name": "평양식 물냉면",   "image": "https://images.pexels.com/photos/37433370/pexels-photo-37433370.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" }
+      ]
+    },
+    {
+      "name": "기본반찬",
+      "items": [
+        { "name": "묵은지 김치",    "image": "https://images.pexels.com/photos/8954371/pexels-photo-8954371.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "갓 담근 백김치", "image": "https://images.pexels.com/photos/6823261/pexels-photo-6823261.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "쪽파 김치",     "image": "https://images.pexels.com/photos/8838806/pexels-photo-8838806.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "명이나물 절임", "image": "https://images.pexels.com/photos/8897510/pexels-photo-8897510.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" }
+      ]
+    }
+  ]
+}

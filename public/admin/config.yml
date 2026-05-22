@@ -1,0 +1,316 @@
+# Sveltia CMS config — Freshwater-Eel (본가민물장어)
+#
+# Backend: GitHub repo rowlow0gold-ops/Freshwater-Eel
+# Auth   : Sveltia's free public OAuth server (sveltia-cms-auth.sveltia.workers.dev)
+#          — works out of the box once you create a GitHub OAuth App.
+
+backend:
+  name: github
+  repo: rowlow0gold-ops/Freshwater-Eel
+  branch: main
+  # Sveltia's free OAuth proxy. No self-hosting needed.
+  base_url: https://sveltia-cms-auth.sveltia.workers.dev
+  auth_endpoint: oauth/authorize
+
+# Production URL — fill in after first Cloudflare Pages deploy.
+site_url: https://freshwater-eel.pages.dev
+display_url: https://freshwater-eel.pages.dev
+locale: ko
+
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: site
+    label: 사이트 정보
+    files:
+      - name: site
+        label: 기본 정보
+        file: src/data/site.json
+        format: json
+        fields:
+          - { name: name, label: 상호명, widget: string }
+          - { name: nameEn, label: 영문 상호명, widget: string }
+          - { name: tagline, label: 한 줄 소개, widget: string }
+          - { name: description, label: 설명, widget: text }
+          - { name: phone, label: 대표 전화, widget: string }
+          - { name: phoneLabel, label: 전화 라벨, widget: string }
+          - { name: sms, label: 문자 번호, widget: string }
+          - { name: email, label: 이메일, widget: string }
+          - { name: kakaoChannelUrl, label: 카카오 채널 URL, widget: string, required: false }
+          - { name: instagramUrl, label: 인스타그램 URL, widget: string, required: false }
+          - { name: web3formsAccessKey, label: Web3Forms 액세스 키, widget: string }
+          - { name: mapEmbedUrl, label: 본점 지도 embed URL, widget: string }
+          - name: company
+            label: 회사 정보
+            widget: object
+            fields:
+              - { name: name, label: 법인명, widget: string }
+              - { name: ceo, label: 대표자, widget: string }
+              - { name: bizId, label: 사업자등록번호, widget: string }
+              - { name: headOffice, label: 본점, widget: string }
+              - { name: logistics, label: 물류센터, widget: string }
+              - { name: privacyOfficer, label: 개인정보보호 책임자, widget: string }
+          - name: hero
+            label: 메인 히어로
+            widget: object
+            fields:
+              - { name: kicker, label: 상단 영문 슬로건, widget: string }
+              - { name: title, label: 메인 타이틀, widget: text }
+              - { name: subtitle, label: 부제, widget: string }
+              - { name: ctaLabel, label: 버튼 텍스트, widget: string }
+              - { name: ctaHref, label: 버튼 링크, widget: string }
+              - { name: promoBanner, label: 상단 프로모션 배너, widget: string, required: false }
+              - { name: bgImage, label: 히어로 배경 이미지 (포스터), widget: image, required: false }
+              - { name: bgVideoIntervalMs, label: 배경 영상 전환 간격(ms), widget: number, default: 10000 }
+              - name: bgVideos
+                label: 배경 영상 URL 목록
+                widget: list
+                field: { name: url, label: 영상 URL, widget: string }
+          - name: brand
+            label: 브랜드 스토리
+            widget: object
+            fields:
+              - { name: title, label: 제목, widget: string }
+              - { name: subtitle, label: 부제, widget: string }
+              - { name: body, label: 본문, widget: text }
+              - { name: videoUrl, label: 유튜브 임베드 URL, widget: string, required: false }
+              - { name: image, label: 이미지, widget: image, required: false }
+          - name: promo
+            label: 프로모 배너 (페이지 중간)
+            widget: object
+            fields:
+              - { name: kicker, label: 상단 라벨, widget: string }
+              - { name: title, label: 제목, widget: string }
+              - { name: body, label: 본문, widget: text }
+              - { name: ctaLabel, label: 버튼 텍스트, widget: string }
+              - { name: ctaHref, label: 버튼 링크, widget: string }
+              - { name: bgImage, label: 배경 이미지 (현재 사용 안 함), widget: image, required: false }
+          - { name: salesBg, label: 매출 섹션 배경 이미지, widget: image, required: false }
+          - { name: ctaBg, label: CTA 섹션 배경 이미지, widget: image, required: false }
+
+      - name: popup
+        label: 자동 팝업 / 문의 팝업 설정
+        file: src/data/popup.json
+        format: json
+        fields:
+          - { name: enabled, label: 자동 팝업 사용, widget: boolean, default: true }
+          - { name: startDate, label: 시작일, widget: datetime, required: false }
+          - { name: endDate, label: 종료일, widget: datetime, required: false }
+          - name: promo
+            label: 자동 팝업 내용 (첫 방문 시 자동 노출)
+            widget: object
+            fields:
+              - { name: kicker, label: 상단 라벨, widget: string }
+              - { name: title, label: 제목, widget: string }
+              - { name: subtitle, label: 부제, widget: string }
+              - { name: body, label: 본문, widget: text }
+              - { name: ctaLabel, label: 버튼 텍스트, widget: string }
+              - { name: ctaOpens, label: 버튼이 여는 팝업 (inquiry / terms / privacy), widget: string, default: inquiry }
+          - name: inquiry
+            label: 문의 팝업 헤더
+            widget: object
+            fields:
+              - { name: kicker, label: 상단 라벨, widget: string }
+              - { name: title, label: 제목, widget: string }
+              - { name: subtitle, label: 부제, widget: string }
+              - { name: body, label: 본문, widget: text }
+              - { name: proposalLabel, label: 창업 제안서 버튼 라벨, widget: string }
+              - { name: proposalHref, label: 창업 제안서 PDF 경로, widget: string }
+
+      - name: legal
+        label: 이용약관 / 개인정보처리방침
+        file: src/data/legal.json
+        format: json
+        fields:
+          - name: terms
+            label: 이용약관
+            widget: object
+            fields:
+              - { name: title, label: 제목, widget: string }
+              - { name: subtitle, label: 부제, widget: string }
+              - { name: updated, label: 시행일 표기, widget: string }
+              - name: sections
+                label: 조항
+                widget: list
+                fields:
+                  - { name: heading, label: 조항 제목, widget: string }
+                  - { name: body, label: 조항 본문, widget: text }
+          - name: privacy
+            label: 개인정보처리방침
+            widget: object
+            fields:
+              - { name: title, label: 제목, widget: string }
+              - { name: subtitle, label: 부제, widget: string }
+              - { name: updated, label: 시행일 표기, widget: string }
+              - name: sections
+                label: 조항
+                widget: list
+                fields:
+                  - { name: heading, label: 조항 제목, widget: string }
+                  - { name: body, label: 조항 본문, widget: text }
+
+  - name: concept
+    label: 컨셉
+    files:
+      - name: concept
+        label: 컨셉 섹션
+        file: src/data/concept.json
+        format: json
+        fields:
+          - { name: title, label: 섹션 제목, widget: string }
+          - { name: subtitle, label: 섹션 부제, widget: text }
+          - name: highlights
+            label: 메인 메뉴 강조 (3개)
+            widget: list
+            fields:
+              - { name: name, label: 메뉴명, widget: string }
+              - { name: description, label: 설명, widget: string }
+              - { name: image, label: 사진, widget: image, required: false }
+          - name: items
+            label: 핵심 가치 (4개)
+            widget: list
+            fields:
+              - { name: name, label: 제목, widget: string }
+              - { name: description, label: 설명, widget: string }
+              - { name: image, label: 사진 (현재는 아이콘으로 대체됨, 무시 가능), widget: image, required: false }
+
+  - name: menu
+    label: 메뉴
+    files:
+      - name: menu
+        label: 메뉴 목록
+        file: src/data/menu.json
+        format: json
+        fields:
+          - { name: title, label: 섹션 제목, widget: string }
+          - { name: subtitle, label: 섹션 부제, widget: text }
+          - name: categories
+            label: 카테고리
+            widget: list
+            fields:
+              - { name: name, label: 카테고리명, widget: string }
+              - name: items
+                label: 메뉴 항목
+                widget: list
+                fields:
+                  - { name: name, label: 메뉴명, widget: string }
+                  - { name: image, label: 사진, widget: image, required: false }
+
+  - name: strategy
+    label: 운영전략
+    files:
+      - name: strategy
+        label: 운영전략
+        file: src/data/strategy.json
+        format: json
+        fields:
+          - { name: title, label: 섹션 제목, widget: string }
+          - { name: subtitle, label: 섹션 부제, widget: text }
+          - { name: bgImage, label: 배경 이미지, widget: image, required: false }
+          - name: pillars
+            label: 3대 강점
+            widget: list
+            fields:
+              - { name: title, label: 제목, widget: string }
+              - { name: description, label: 설명, widget: string }
+          - name: supply
+            label: 공급 시스템 (STEP 1-3)
+            widget: object
+            fields:
+              - { name: title, label: 제목, widget: string }
+              - { name: subtitle, label: 부제, widget: text }
+              - name: items
+                label: 단계
+                widget: list
+                fields:
+                  - { name: title, label: 제목, widget: string }
+                  - { name: description, label: 설명, widget: string }
+
+  - name: sales
+    label: 매출 기록
+    files:
+      - name: sales
+        label: 가맹점 최고 일매출
+        file: src/data/sales.json
+        format: json
+        fields:
+          - { name: title, label: 제목, widget: string }
+          - { name: subtitle, label: 부제, widget: text }
+          - { name: label, label: 라벨, widget: string }
+          - name: records
+            label: 매출 기록
+            widget: list
+            fields:
+              - { name: store, label: 지점명, widget: string }
+              - { name: amount, label: 금액(원), widget: number }
+
+  - name: branches
+    label: 매장
+    files:
+      - name: branches
+        label: 매장 목록
+        file: src/data/branches.json
+        format: json
+        fields:
+          - { name: title, label: 섹션 제목, widget: string }
+          - { name: subtitle, label: 섹션 부제, widget: text }
+          - name: items
+            label: 매장
+            widget: list
+            fields:
+              - { name: name, label: 지점명, widget: string }
+              - { name: address, label: 주소, widget: string }
+
+  - name: franchise
+    label: 가맹 안내
+    files:
+      - name: franchise
+        label: 창업 비용 / 혜택
+        file: src/data/franchise.json
+        format: json
+        fields:
+          - { name: title, label: 섹션 제목, widget: string }
+          - { name: subtitle, label: 섹션 부제, widget: text }
+          - name: pillars
+            label: 관리 키워드
+            widget: list
+            field: { name: pillar, label: 키워드, widget: string }
+          - name: costs
+            label: 창업 비용표
+            widget: list
+            fields:
+              - { name: group, label: 구분, widget: string }
+              - { name: item, label: 항목, widget: string }
+              - { name: original, label: 원금액, widget: string, required: false }
+              - { name: applied, label: 적용, widget: string }
+          - name: promotions
+            label: 호점별 혜택
+            widget: list
+            fields:
+              - { name: label, label: 호점 구간, widget: string }
+              - { name: status, label: 상태, widget: string }
+              - name: benefits
+                label: 혜택
+                widget: list
+                fields:
+                  - { name: item, label: 항목, widget: string }
+                  - { name: original, label: 원금액, widget: string }
+                  - { name: applied, label: 적용, widget: string }
+
+  - name: notices
+    label: 공지사항
+    files:
+      - name: notices
+        label: 공지사항
+        file: src/data/notices.json
+        format: json
+        fields:
+          - { name: title, label: 섹션 제목, widget: string }
+          - name: items
+            label: 공지
+            widget: list
+            fields:
+              - { name: category, label: 분류, widget: string }
+              - { name: text, label: 내용, widget: string }
+              - { name: link, label: 링크, widget: string, required: false }

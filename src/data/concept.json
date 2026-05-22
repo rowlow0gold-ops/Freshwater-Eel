@@ -1,0 +1,15 @@
+{
+  "title": "온 가족의 보양식, 본가의 프리미엄 장어 무한리필",
+  "subtitle": "본가민물장어는 손질된 프리미엄 장어와 한우·흑돼지·왕새우까지 다양한 무한리필 메뉴를 제공합니다.",
+  "items": [
+    { "name": "장기 성장", "description": "유행 아이템이 아닌 보양식 본질에 집중합니다", "image": "https://images.pexels.com/photos/31735995/pexels-photo-31735995.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" },
+    { "name": "안정 수익", "description": "셀프 시스템 도입으로 부부 운영이 가능합니다", "image": "https://images.pexels.com/photos/5774152/pexels-photo-5774152.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" },
+    { "name": "쉬운 운영", "description": "손질된 순살 장어를 매장으로 직배송합니다", "image": "https://images.pexels.com/photos/31663811/pexels-photo-31663811.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" },
+    { "name": "성공 창업", "description": "오픈 후 4년, 폐점 가맹점이 한 곳도 없습니다", "image": "https://images.pexels.com/photos/9371714/pexels-photo-9371714.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" }
+  ],
+  "highlights": [
+    { "name": "프리미엄 장어", "description": "담백하고 부드러운 풍미", "image": "https://images.pexels.com/photos/19981737/pexels-photo-19981737.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&fit=crop" },
+    { "name": "흑돼지 삼겹살", "description": "탱글한 육즙",         "image": "https://images.pexels.com/photos/5338143/pexels-photo-5338143.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&fit=crop" },
+    { "name": "차돌 우삼겹",   "description": "쫄깃 고소한 식감",   "image": "https://images.pexels.com/photos/5774145/pexels-photo-5774145.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&fit=crop" }
+  ]
+}

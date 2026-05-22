@@ -1,0 +1,21 @@
+{
+  "title": "Franchisee revenue speaks for Bonga.",
+  "subtitle": "Since 2023 — zero closures and consistently strong daily revenue.",
+  "label": "Highest daily revenue per store",
+  "records": [
+    { "store": "Gwangan",    "amount": 10920000 },
+    { "store": "Gagyeong",   "amount": 9180000  },
+    { "store": "Sanbon",     "amount": 8420000  },
+    { "store": "Neunggok",   "amount": 7610000  },
+    { "store": "Dongtan",    "amount": 7480000  },
+    { "store": "Danwon",     "amount": 7325000  },
+    { "store": "Bongmyeong", "amount": 7110000  },
+    { "store": "Gwanggyo",   "amount": 6940000  },
+    { "store": "Susong",     "amount": 5780000  },
+    { "store": "Yeongdeung", "amount": 5260000  },
+    { "store": "Yeongtong",  "amount": 5180000  },
+    { "store": "Jincheon",   "amount": 4995000  },
+    { "store": "Jochiwon",   "amount": 4720000  },
+    { "store": "Dujeong",    "amount": 4390000  }
+  ]
+}

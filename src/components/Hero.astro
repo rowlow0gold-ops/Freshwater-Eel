@@ -1,0 +1,102 @@
+---
+import siteKo from "../data/site.json";
+import siteEn from "../data/en/site.json";
+
+interface Props { lang?: "ko" | "en"; }
+const { lang = "ko" } = Astro.props;
+const site = lang === "en" ? siteEn : siteKo;
+
+const videos: string[] = Array.isArray((site.hero as any).bgVideos)
+  ? (site.hero as any).bgVideos
+  : [];
+const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
+---
+
+<section id="brand" class="relative bg-stone-950 text-white overflow-hidden">
+  {site.hero.promoBanner && (
+    <div class="marquee bg-[var(--color-brand)] text-white">
+      <div class="marquee-track py-2.5 text-sm font-semibold">
+        {Array.from({ length: 6 }).map(() => (
+          <span class="px-6">★ {site.hero.promoBanner}</span>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Multiple Pexels videos rotated every 10s (data-hero-video / data-interval) -->
+  <div
+    class="absolute inset-0 overflow-hidden"
+    data-hero-rotator
+    data-interval={intervalMs}
+  >
+    <!-- Solid black behind videos so non-loaded ones don't bleed through -->
+    <div class="absolute inset-0 bg-stone-950"></div>
+
+    {videos.map((url, i) => (
+      <video
+        data-hero-video={i}
+        autoplay={i === 0}
+        loop
+        muted
+        playsinline
+        preload="auto"
+        {/* No poster — keep solid black bg while the wave videos load, no still photo */}
+        class={`absolute inset-0 w-full h-full object-cover ${
+          i === 0 ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <source src={url} type="video/mp4" />
+      </video>
+    ))}
+
+    <!-- Dark gradient for legible text -->
+    <div class="absolute inset-0 bg-gradient-to-b from-stone-950/65 via-stone-950/55 to-stone-950"></div>
+  </div>
+
+  <!-- Decorative glow -->
+  <div aria-hidden="true" class="absolute inset-0 pointer-events-none">
+    <div class="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-[var(--color-brand)]/30 blur-[120px]"></div>
+    <div class="absolute -bottom-32 -right-32 w-[480px] h-[480px] rounded-full bg-[var(--color-accent)]/20 blur-[120px]"></div>
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-6xl px-4 py-32 md:py-48 text-center">
+    <p class="reveal text-sm md:text-base tracking-[0.3em] text-[var(--color-accent)] font-semibold uppercase">
+      {site.hero.kicker}
+    </p>
+    <h1 class="reveal mt-6 text-4xl md:text-7xl font-extrabold leading-tight whitespace-pre-line drop-shadow">
+      {site.hero.title}
+    </h1>
+    <p class="reveal mt-8 text-base md:text-lg text-stone-200 max-w-2xl mx-auto">
+      {site.hero.subtitle}
+    </p>
+    <a
+      href={site.hero.ctaHref}
+      class="reveal pulse inline-block mt-12 rounded-full bg-[var(--color-brand)] px-10 py-4 text-base md:text-lg font-bold text-white hover:bg-[var(--color-brand-dark)] transition shadow-lg"
+    >
+      {site.hero.ctaLabel}
+    </a>
+  </div>
+
+  <!-- Animated wave at the bottom -->
+  <div class="absolute inset-x-0 bottom-0 z-20 pointer-events-none" aria-hidden="true">
+    <svg
+      class="hero-waves"
+      viewBox="0 24 150 28"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <path
+          id="hero-wave-path"
+          d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+        />
+      </defs>
+      <g class="wave-parallax">
+        <use href="#hero-wave-path" x="48" y="0" fill="rgba(255,255,255,0.25)" />
+        <use href="#hero-wave-path" x="48" y="3" fill="rgba(255,255,255,0.45)" />
+        <use href="#hero-wave-path" x="48" y="5" fill="rgba(255,255,255,0.7)" />
+        <use href="#hero-wave-path" x="48" y="7" fill="#ffffff" />
+      </g>
+    </svg>
+  </div>
+</section>

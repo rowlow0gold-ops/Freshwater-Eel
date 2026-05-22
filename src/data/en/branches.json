@@ -1,0 +1,16 @@
+{
+  "title": "Bonga Eel locations",
+  "subtitle": "Even 200㎡+ flagship stores keep opening through owner word-of-mouth.",
+  "items": [
+    { "name": "Suwon Gwanggyo",     "address": "145 Gwanggyo Jungang-ro, Yeongtong-gu, Suwon-si, Gyeonggi-do",     "image": "https://images.pexels.com/photos/31735995/pexels-photo-31735995.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" },
+    { "name": "Busan Gwangan",      "address": "219 Gwangan Haebyeon-ro, Suyeong-gu, Busan",                        "image": "https://images.pexels.com/photos/31663811/pexels-photo-31663811.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" },
+    { "name": "Cheongju Gagyeong",  "address": "312 Gagyeong-ro, Heungdeok-gu, Cheongju-si, Chungbuk",              "image": "https://images.pexels.com/photos/239975/pexels-photo-239975.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop"   },
+    { "name": "Ansan Danwon",       "address": "88 Gwangdeok-daero, Danwon-gu, Ansan-si, Gyeonggi-do",              "image": "https://images.pexels.com/photos/9371714/pexels-photo-9371714.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop"  },
+    { "name": "Siheung Neunggok",   "address": "47 Neunggok Jungang-ro, Siheung-si, Gyeonggi-do",                   "image": "https://images.pexels.com/photos/5774152/pexels-photo-5774152.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop"  },
+    { "name": "Hwaseong Dongtan",   "address": "624 Dongtan Sunhwan-daero, Hwaseong-si, Gyeonggi-do",               "image": "https://images.pexels.com/photos/8999080/pexels-photo-8999080.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop"  },
+    { "name": "Cheongju Bongmyeong","address": "99 Bongmyeong-ro, Heungdeok-gu, Cheongju-si, Chungbuk",             "image": "https://images.pexels.com/photos/31735995/pexels-photo-31735995.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" },
+    { "name": "Gunsan Susong",      "address": "218 Susong-ro, Gunsan-si, Jeonbuk State",                            "image": "https://images.pexels.com/photos/31663811/pexels-photo-31663811.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" },
+    { "name": "Iksan Yeongdeung",   "address": "731 Yeongdeung-dong, Iksan-si, Jeonbuk State",                       "image": "https://images.pexels.com/photos/239975/pexels-photo-239975.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop"   },
+    { "name": "Chungbuk Jincheon",  "address": "1051 Sangsan-ro, Jincheon-eup, Jincheon-gun, Chungbuk",              "image": "https://images.pexels.com/photos/9371714/pexels-photo-9371714.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop"  }
+  ]
+}

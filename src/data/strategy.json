@@ -1,0 +1,19 @@
+{
+  "title": "본가가 만든 무한리필 장어 표준",
+  "subtitle": "2023년부터 현재까지 폐점 가맹점 한 곳 없이 안정적인 매출이 발생하고 있습니다.",
+  "bgImage": "https://images.pexels.com/photos/16569755/pexels-photo-16569755.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop",
+  "pillars": [
+    { "title": "업계 최저 수준 원가율", "description": "직거래 양식 공급으로 가격 경쟁력 확보" },
+    { "title": "오토 재고관리 시스템",   "description": "손질된 순살장어 정량 배송, 로스율 제로" },
+    { "title": "고소득 수익 구조",       "description": "표준 매장 기준 운영 수익률 약 31%" }
+  ],
+  "supply": {
+    "title": "원스톱 공급 시스템",
+    "subtitle": "본가 직영 양식장 → 손질장 → 콜드체인 → 매장까지 한 사이클로 책임집니다.",
+    "items": [
+      { "title": "프리미엄 장어",   "description": "본가 계약 양식장에서만 출하",        "image": "https://images.pexels.com/photos/16569753/pexels-photo-16569753.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" },
+      { "title": "순살 손질 공급", "description": "머리/내장 제거 후 정량 패킹",          "image": "https://images.pexels.com/photos/11444804/pexels-photo-11444804.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" },
+      { "title": "안정적 물류",     "description": "오픈 지역 제한제로 공급 안정성 확보", "image": "https://images.pexels.com/photos/16569754/pexels-photo-16569754.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" }
+    ]
+  }
+}

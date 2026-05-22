@@ -1,0 +1,51 @@
+{
+  "title": "본가민물장어 가맹점 창업안내",
+  "subtitle": "본가민물장어 가맹본사는 10년을 함께할 수 있도록 가맹점 관리에 집중합니다.",
+  "pillars": ["집중관리", "운영지원", "성장전략"],
+  "costs": [
+    { "group": "공통사항", "item": "가맹비",   "original": "8,000,000원",          "applied": "본사문의" },
+    { "group": "공통사항", "item": "교육비",   "original": "3,000,000원",          "applied": "본사문의" },
+    { "group": "공통사항", "item": "로열티",   "original": "월 3%",                "applied": "본사문의" },
+    { "group": "공통사항", "item": "POP",      "original": "2,000,000원",          "applied": "협의사항" },
+    { "group": "공통사항", "item": "POS",      "original": "",                    "applied": "본사문의" },
+    { "group": "선택사항", "item": "인테리어", "original": "3.3㎡ / 1,800,000원", "applied": "자체시공" },
+    { "group": "선택사항", "item": "간판",     "original": "8,500,000원",          "applied": "자체시공" },
+    { "group": "선택사항", "item": "주방시설", "original": "",                    "applied": "자체구입" },
+    { "group": "선택사항", "item": "접객시설", "original": "",                    "applied": "자체구입" }
+  ],
+  "promotions": [
+    {
+      "label": "16호점 ~ 25호점",
+      "status": "진행중",
+      "benefits": [
+        { "item": "가맹비", "original": "8,000,000원",  "applied": "본사문의" },
+        { "item": "교육비", "original": "3,000,000원",  "applied": "본사문의" },
+        { "item": "보증금", "original": "15,000,000원", "applied": "면제" },
+        { "item": "감리비", "original": "200,000원",    "applied": "면제" },
+        { "item": "로열티", "original": "월 3%",        "applied": "본사문의" }
+      ]
+    },
+    {
+      "label": "06호점 ~ 15호점",
+      "status": "오픈완료",
+      "benefits": [
+        { "item": "가맹비", "original": "8,000,000원",  "applied": "본사문의" },
+        { "item": "교육비", "original": "3,000,000원",  "applied": "본사문의" },
+        { "item": "보증금", "original": "15,000,000원", "applied": "면제" },
+        { "item": "감리비", "original": "200,000원",    "applied": "면제" },
+        { "item": "로열티", "original": "월 3%",        "applied": "면제" }
+      ]
+    },
+    {
+      "label": "01호점 ~ 05호점",
+      "status": "오픈완료",
+      "benefits": [
+        { "item": "가맹비", "original": "8,000,000원",  "applied": "면제" },
+        { "item": "교육비", "original": "3,000,000원",  "applied": "면제" },
+        { "item": "보증금", "original": "15,000,000원", "applied": "면제" },
+        { "item": "감리비", "original": "200,000원",    "applied": "면제" },
+        { "item": "로열티", "original": "월 3%",        "applied": "면제" }
+      ]
+    }
+  ]
+}

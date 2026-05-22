@@ -1,0 +1,19 @@
+{
+  "title": "The all-you-can-eat eel standard, built by Bonga.",
+  "subtitle": "From 2023 to today — zero franchise closures and stable revenue across the network.",
+  "bgImage": "https://images.pexels.com/photos/16569755/pexels-photo-16569755.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop",
+  "pillars": [
+    { "title": "Industry-low cost ratio", "description": "Direct supply from contracted farms locks in price competitiveness." },
+    { "title": "Auto inventory system",   "description": "Pre-cut, portioned eel delivered to store. Zero waste." },
+    { "title": "High-margin economics",   "description": "~31% target operating margin at a standard store." }
+  ],
+  "supply": {
+    "title": "One-stop supply chain",
+    "subtitle": "Bonga-managed farm → cleaning facility → cold chain → store, all in one cycle.",
+    "items": [
+      { "title": "Premium eel",       "description": "Shipped only from Bonga-contracted farms.",      "image": "https://images.pexels.com/photos/16569753/pexels-photo-16569753.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" },
+      { "title": "Boneless prep",     "description": "Head and offal removed, portion-packed.",        "image": "https://images.pexels.com/photos/11444804/pexels-photo-11444804.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" },
+      { "title": "Stable logistics",  "description": "Territory limits secure consistent supply.",     "image": "https://images.pexels.com/photos/16569754/pexels-photo-16569754.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" }
+    ]
+  }
+}

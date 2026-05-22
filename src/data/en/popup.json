@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "startDate": "",
+  "endDate": "",
+  "promo": {
+    "kicker": "LIMITED OFFER",
+    "title": "25-Store Launch Promotion",
+    "subtitle": "New & rebrand franchise openings",
+    "body": "Franchise fee, deposit, and audit fee are waived for a limited number of openings.\nContact Bonga Eel HQ for details.",
+    "ctaLabel": "Talk to us",
+    "ctaOpens": "inquiry"
+  },
+  "inquiry": {
+    "kicker": "Business Inquiry",
+    "title": "Business Inquiry",
+    "subtitle": "Domestic & international franchise / partnership",
+    "body": "International master franchise & domestic inquiry — we reply within 2 business days.",
+    "proposalLabel": "Download franchise proposal (PDF)",
+    "proposalHref": "/files/bonga-eel-proposal.pdf"
+  }
+}

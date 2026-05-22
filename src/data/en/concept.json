@@ -1,0 +1,15 @@
+{
+  "title": "Family wellness food — Bonga's premium all-you-can-eat eel.",
+  "subtitle": "Bonga Eel serves prepped premium freshwater eel along with hanwoo beef, black-pork belly, and king shrimp — all unlimited.",
+  "items": [
+    { "name": "Long-term growth", "description": "We focus on the essence of wellness food, not trends.", "image": "https://images.pexels.com/photos/31735995/pexels-photo-31735995.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" },
+    { "name": "Stable revenue",   "description": "Self-serve systems let a couple run the store.",         "image": "https://images.pexels.com/photos/5774152/pexels-photo-5774152.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" },
+    { "name": "Easy operation",   "description": "Pre-prepped boneless eel is delivered direct to store.", "image": "https://images.pexels.com/photos/31663811/pexels-photo-31663811.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" },
+    { "name": "Proven success",   "description": "Four years open, zero franchise closures.",              "image": "https://images.pexels.com/photos/9371714/pexels-photo-9371714.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" }
+  ],
+  "highlights": [
+    { "name": "Premium eel",      "description": "Clean, delicate flavor",        "image": "https://images.pexels.com/photos/19981737/pexels-photo-19981737.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&fit=crop" },
+    { "name": "Black-pork belly", "description": "Tender, juicy bite",            "image": "https://images.pexels.com/photos/5338143/pexels-photo-5338143.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&fit=crop" },
+    { "name": "Chadol brisket",   "description": "Chewy and savory texture",      "image": "https://images.pexels.com/photos/5774145/pexels-photo-5774145.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&fit=crop" }
+  ]
+}

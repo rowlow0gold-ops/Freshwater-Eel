@@ -1,0 +1,41 @@
+{
+  "title": "A full table for the whole family.",
+  "subtitle": "From premium eel to hanwoo beef, black-pork, king shrimp, sides, and cold finishers.",
+  "categories": [
+    {
+      "name": "Signature",
+      "items": [
+        { "name": "Premium freshwater eel", "image": "https://images.pexels.com/photos/16569756/pexels-photo-16569756.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "Black-pork belly",       "image": "https://images.pexels.com/photos/5338143/pexels-photo-5338143.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "U.S. sirloin",           "image": "https://images.pexels.com/photos/1109024/pexels-photo-1109024.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "U.S. short rib",         "image": "https://images.pexels.com/photos/19998454/pexels-photo-19998454.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "Chadol brisket",         "image": "https://images.pexels.com/photos/5774145/pexels-photo-5774145.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "King shrimp",            "image": "https://images.pexels.com/photos/1998920/pexels-photo-1998920.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" }
+      ]
+    },
+    {
+      "name": "Lunch special",
+      "items": [
+        { "name": "Eel stir-fry",          "image": "https://images.pexels.com/photos/37290960/pexels-photo-37290960.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "Eel pot rice",          "image": "https://images.pexels.com/photos/31652600/pexels-photo-31652600.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "Spicy eel hot pot",     "image": "https://images.pexels.com/photos/34992219/pexels-photo-34992219.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" }
+      ]
+    },
+    {
+      "name": "Cold finishers",
+      "items": [
+        { "name": "Pyongyang bibim naengmyeon", "image": "https://images.pexels.com/photos/8980454/pexels-photo-8980454.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop"   },
+        { "name": "Pyongyang mul naengmyeon",   "image": "https://images.pexels.com/photos/37433370/pexels-photo-37433370.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" }
+      ]
+    },
+    {
+      "name": "Sides",
+      "items": [
+        { "name": "Aged kimchi",          "image": "https://images.pexels.com/photos/8954371/pexels-photo-8954371.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "Fresh white kimchi",   "image": "https://images.pexels.com/photos/6823261/pexels-photo-6823261.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "Scallion kimchi",      "image": "https://images.pexels.com/photos/8838806/pexels-photo-8838806.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" },
+        { "name": "Pickled myeongi leaf", "image": "https://images.pexels.com/photos/8897510/pexels-photo-8897510.jpeg?auto=compress&cs=tinysrgb&w=700&h=700&fit=crop" }
+      ]
+    }
+  ]
+}

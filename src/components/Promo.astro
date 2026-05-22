@@ -1,0 +1,42 @@
+---
+import siteKo from "../data/site.json";
+import siteEn from "../data/en/site.json";
+
+interface Props { lang?: "ko" | "en"; }
+const { lang = "ko" } = Astro.props;
+const site = lang === "en" ? siteEn : siteKo;
+---
+
+<section id="promo" class="relative overflow-hidden bg-stone-950 text-white">
+  <!-- Decorative glow only — no photo -->
+  <div aria-hidden="true" class="absolute inset-0 pointer-events-none">
+    <div class="absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full bg-[var(--color-brand)]/30 blur-[120px]"></div>
+    <div class="absolute -bottom-32 -right-32 w-[420px] h-[420px] rounded-full bg-[var(--color-accent)]/20 blur-[120px]"></div>
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-5xl px-4 py-20 md:py-28 grid gap-8 md:grid-cols-[1.4fr_1fr] items-center">
+    <div>
+      <p class="reveal text-sm tracking-[0.3em] text-[var(--color-accent)] font-bold uppercase">
+        {site.promo.kicker}
+      </p>
+      <h2 class="reveal mt-4 text-3xl md:text-5xl font-extrabold leading-tight">
+        {site.promo.title}
+      </h2>
+      <p class="reveal mt-5 text-stone-200 text-base md:text-lg leading-relaxed">
+        {site.promo.body}
+      </p>
+    </div>
+
+    <div class="reveal flex md:justify-end">
+      <a
+        href={site.promo.ctaHref}
+        class="pulse inline-flex items-center gap-3 rounded-full bg-[var(--color-brand)] px-8 py-4 text-base md:text-lg font-bold text-white hover:bg-[var(--color-brand-dark)] transition shadow-xl"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/>
+        </svg>
+        {site.promo.ctaLabel}
+      </a>
+    </div>
+  </div>
+</section>

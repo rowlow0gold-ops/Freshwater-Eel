@@ -1,0 +1,110 @@
+---
+import siteKo from "../data/site.json";
+import siteEn from "../data/en/site.json";
+
+const isEn = Astro.url.pathname.startsWith("/en");
+const site = isEn ? siteEn : siteKo;
+const phoneTip = isEn ? `Call · ${site.phone}` : `전화문의 · ${site.phone}`;
+const kakaoTip = isEn ? "KakaoTalk chat" : "카카오톡 상담 · KakaoTalk";
+const phoneAria = isEn ? `Call ${site.phone}` : `전화문의 ${site.phone}`;
+---
+
+<!-- Right-bottom floating buttons (desktop). Offset above StickyBottomBar.
+     Icon-only with hover tooltip on the left side. -->
+<aside
+  class="hidden md:flex fixed right-4 z-50 flex-col gap-2 items-end"
+  style="bottom: calc(env(safe-area-inset-bottom, 0px) + 96px)"
+>
+  <!-- Instagram -->
+  <a
+    href={site.instagramUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="cta-fab group"
+    style="background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fd5949 35%, #d6249f 60%, #285AEB 100%); color:#fff;"
+    aria-label="Instagram"
+  >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+      <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+    </svg>
+    <span class="cta-tip">Instagram</span>
+  </a>
+
+  <!-- 전화문의 -->
+  <a
+    href={`tel:${site.phone}`}
+    class="cta-fab group bg-[var(--color-brand)] text-white hover:bg-[var(--color-brand-dark)]"
+    aria-label={phoneAria}
+  >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/>
+    </svg>
+    <span class="cta-tip">{phoneTip}</span>
+  </a>
+
+  <!-- 카카오톡 상담 -->
+  <a
+    href={site.kakaoChannelUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="cta-fab group text-stone-900 hover:brightness-95"
+    style="background:#FEE500;"
+    aria-label="KakaoTalk 채널"
+  >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 3C6.48 3 2 6.58 2 11c0 2.7 1.7 5.07 4.27 6.52L5 22l4.9-2.6c.69.08 1.39.13 2.1.13 5.52 0 10-3.58 10-8s-4.48-8.53-10-8.53Z"/>
+    </svg>
+    <span class="cta-tip">{kakaoTip}</span>
+  </a>
+</aside>
+
+<style>
+  .cta-fab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.35);
+    transition: transform 180ms ease, filter 180ms ease, background-color 180ms ease;
+  }
+  .cta-fab:hover {
+    transform: translateX(-2px);
+  }
+  .cta-tip {
+    position: absolute;
+    right: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    white-space: nowrap;
+    background: rgba(28, 25, 23, 0.92);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 160ms ease, transform 160ms ease;
+    box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.4);
+  }
+  .cta-tip::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    border: 5px solid transparent;
+    border-left-color: rgba(28, 25, 23, 0.92);
+  }
+  .cta-fab:hover .cta-tip,
+  .cta-fab:focus-visible .cta-tip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+</style>

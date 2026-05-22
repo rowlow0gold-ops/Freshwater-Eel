@@ -1,0 +1,8 @@
+{
+  "title": "본가민물장어 창업 지원센터",
+  "items": [
+    { "category": "신규개발", "text": "서울 강서 / 부산 해운대 권역 점포개발 진행 중" },
+    { "category": "오픈완료", "text": "수원 광교 본점 / 부산 광안점 오픈 완료" },
+    { "category": "수상", "text": "2025 외식업 신뢰브랜드 대상 수상", "link": "https://example.com/news/2025-bonga-award" }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "name": "BONGA EEL",
+  "nameEn": "BONGA EEL",
+  "tagline": "Premium All-You-Can-Eat Freshwater Eel",
+  "description": "Bonga Eel is a Korean family-style franchise specializing in premium freshwater eel, hanwoo beef, Jeju black-pork belly, and king shrimp — all served all-you-can-eat.",
+  "phone": "+82-1577-3214",
+  "phoneLabel": "Franchise",
+  "sms": "+82-10-2848-7621",
+  "email": "global@bongafood.co.kr",
+  "kakaoChannelUrl": "https://pf.kakao.com/_REPLACE_WITH_CHANNEL",
+  "instagramUrl": "https://www.instagram.com/bonga_eel",
+  "web3formsAccessKey": "REPLACE_WITH_YOUR_WEB3FORMS_KEY",
+  "mapEmbedUrl": "https://www.google.com/maps?q=145+Gwanggyo+Jungang-ro+Yeongtong-gu+Suwon&output=embed",
+  "company": {
+    "name": "Bonga Food Co., Ltd.",
+    "ceo": "Bonga Kim",
+    "bizId": "000-00-00000",
+    "headOffice": "145 Gwanggyo Jungang-ro, Yeongtong-gu, Suwon-si, Korea",
+    "logistics": "87 Cheongbuk Jungang-ro, Cheongbuk-eup, Pyeongtaek-si, Gyeonggi-do, Korea",
+    "privacyOfficer": "Jeongmin Lee"
+  },
+  "hero": {
+    "kicker": "EEL HERITAGE FOR THE NEXT 100 YEARS",
+    "title": "Three generations\nof Korean\nfreshwater eel.",
+    "subtitle": "Stable revenue and self-serve operations support successful franchise launches at home and abroad.",
+    "ctaLabel": "Franchise Inquiry +82-1577-3214",
+    "ctaHref": "tel:+8215773214",
+    "promoBanner": "Limited time — fee waivers for stores 16–25. New & rebrand openings welcome.",
+    "bgImage": "https://images.pexels.com/photos/16569756/pexels-photo-16569756.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1200&fit=crop",
+    "bgVideoIntervalMs": 10000,
+    "bgVideos": [
+      "https://videos.pexels.com/video-files/34029351/14433062_1920_1080_24fps.mp4",
+      "https://videos.pexels.com/video-files/4328587/4328587-uhd_2560_1440_30fps.mp4",
+      "https://videos.pexels.com/video-files/11422269/11422269-uhd_2560_1440_60fps.mp4",
+      "https://videos.pexels.com/video-files/20082249/20082249-uhd_2560_1440_30fps.mp4"
+    ]
+  },
+  "brand": {
+    "title": "Built on 4 strong years, ready for 10 more — together.",
+    "subtitle": "Honest quality. Unshakeable brand power.",
+    "body": "Founded in 2023, Bonga Eel grew from its Gwanggyo flagship in Suwon to 18 franchise locations across Korea.",
+    "videoUrl": "https://www.youtube.com/embed/KHL5JDi33V0",
+    "image": "https://images.pexels.com/photos/19981737/pexels-photo-19981737.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop"
+  },
+  "promo": {
+    "kicker": "LIMITED OFFER",
+    "title": "25-store Launch Promotion",
+    "body": "For new and rebrand franchise openings — franchise fee, deposit, and audit fee are waived. Contact Bonga Eel HQ for details.",
+    "ctaLabel": "Call +82-1577-3214",
+    "ctaHref": "tel:+8215773214",
+    "bgImage": "https://images.pexels.com/photos/16569755/pexels-photo-16569755.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop"
+  },
+  "salesBg": "https://images.pexels.com/photos/16569753/pexels-photo-16569753.jpeg?auto=compress&cs=tinysrgb&w=1920&h=900&fit=crop",
+  "ctaBg": "https://images.pexels.com/photos/16569754/pexels-photo-16569754.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop"
+}

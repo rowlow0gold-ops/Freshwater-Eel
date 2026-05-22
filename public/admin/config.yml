@@ -8,8 +8,8 @@ backend:
   name: github
   repo: rowlow0gold-ops/Freshwater-Eel
   branch: main
-  # Sveltia's free OAuth proxy. No self-hosting needed.
-  base_url: https://sveltia-cms-auth.sveltia.workers.dev
+  # Your self-hosted OAuth proxy (Cloudflare Worker).
+  base_url: https://sveltia-cms-auth.rowlow302606.workers.dev
   auth_endpoint: oauth/authorize
 
 site_url: https://eel.minhojan-world.site

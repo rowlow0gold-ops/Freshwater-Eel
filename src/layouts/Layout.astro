@@ -1,29 +1,110 @@
 ---
 import "../styles/global.css";
-import site from "../data/site.json";
+import siteKo from "../data/site.json";
+import siteEn from "../data/en/site.json";
 
 interface Props {
   title?: string;
   description?: string;
+  lang?: "ko" | "en";
+  /** Path that uniquely identifies the current page within the site (e.g. "/", "/en/"). */
+  path?: string;
+  /** Override the og:image. Defaults to the brand hero image. */
+  ogImage?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, lang = "ko", path = "/", ogImage } = Astro.props;
+const site = lang === "en" ? siteEn : siteKo;
+const htmlLang = lang === "en" ? "en" : "ko";
+const ogLocale = lang === "en" ? "en_US" : "ko_KR";
+
+// Site origin from astro.config.mjs.
+const origin = Astro.site?.toString().replace(/\/$/, "") ?? "https://eel.minhojan-world.site";
+const canonical = `${origin}${path}`;
+
 const pageTitle = title ? `${title} | ${site.name}` : `${site.name} — ${site.tagline}`;
 const pageDescription = description ?? site.description;
+
+// Default og:image: hero photo (Pexels). Trimmed for social-card aspect.
+const defaultOgImage = "https://images.pexels.com/photos/16569756/pexels-photo-16569756.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop";
+const ogImageUrl = ogImage ?? defaultOgImage;
+
+// hreflang siblings.
+const koHref = `${origin}/`;
+const enHref = `${origin}/en/`;
+
+// JSON-LD: Restaurant + Organization (franchise). Helps both Google and Naver
+// understand what the business is, where it operates, and how to contact it.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": site.name,
+  "alternateName": (site as any).nameEn,
+  "description": site.description,
+  "url": origin,
+  "telephone": site.phone,
+  "email": site.email,
+  "logo": `${origin}/favicon.svg`,
+  "image": [ogImageUrl],
+  "servesCuisine": ["Korean", "Eel", "민물장어"],
+  "priceRange": "₩₩",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": (site as any).company?.headOffice,
+    "addressCountry": "KR"
+  },
+  "sameAs": [
+    (site as any).instagramUrl,
+    (site as any).kakaoChannelUrl
+  ].filter(Boolean)
+};
+
+// Naver / Google site-verification meta values can be set as env vars (or hard-coded here
+// after you sign up at Naver Search Advisor / Google Search Console).
+const naverVerify = import.meta.env.PUBLIC_NAVER_SITE_VERIFICATION || "";
+const googleVerify = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || "";
 ---
 
 <!doctype html>
-<html lang="ko">
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#b8341f" />
+
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Search-engine ownership verification (paste codes from Search Console / Naver) -->
+    {googleVerify && <meta name="google-site-verification" content={googleVerify} />}
+    {naverVerify && <meta name="naver-site-verification" content={naverVerify} />}
+
+    <!-- Open Graph (Facebook / KakaoTalk / Naver Blog previews) -->
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocale === "ko_KR" ? "en_US" : "ko_KR"} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={pageTitle} />
+
+    <!-- Twitter Card (also picked up by some Korean previewers) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- hreflang (international SEO between KO and EN pages) -->
+    <link rel="alternate" hreflang="ko" href={koHref} />
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="x-default" href={koHref} />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,6 +112,9 @@ const pageDescription = description ?? site.description;
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Structured data — helps Google rich results and Naver understand the business -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="bg-white text-stone-900 antialiased">
     <slot />

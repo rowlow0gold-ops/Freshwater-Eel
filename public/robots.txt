@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+# Naver-specific crawlers (allowed explicitly for clarity)
+User-agent: Yeti
+Allow: /
+Disallow: /admin/
+
+User-agent: NaverBot
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://eel.minhojan-world.site/sitemap-index.xml

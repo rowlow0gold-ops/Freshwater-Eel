@@ -12,9 +12,8 @@ backend:
   base_url: https://sveltia-cms-auth.sveltia.workers.dev
   auth_endpoint: oauth/authorize
 
-# Production URL — fill in after first Cloudflare Pages deploy.
-site_url: https://freshwater-eel.pages.dev
-display_url: https://freshwater-eel.pages.dev
+site_url: https://eel.minhojan-world.site
+display_url: https://eel.minhojan-world.site
 locale: ko
 
 media_folder: public/images

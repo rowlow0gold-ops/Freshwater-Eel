@@ -3,8 +3,6 @@ import popupKo from "../data/popup.json";
 import popupEn from "../data/en/popup.json";
 import siteKo from "../data/site.json";
 import siteEn from "../data/en/site.json";
-import inquiryKo from "../data/inquiry.json";
-import inquiryEn from "../data/en/inquiry.json";
 
 interface Props {
   lang?: "ko" | "en";
@@ -12,14 +10,10 @@ interface Props {
 const { lang = "ko" } = Astro.props;
 const popup = (lang === "en" ? popupEn : popupKo).inquiry;
 const site = lang === "en" ? siteEn : siteKo;
-const copy = lang === "en" ? inquiryEn : inquiryKo;
 const t = lang === "en";
 
-const inquiry = (site as any).inquiry || {};
-const workerEndpoint: string = inquiry.workerEndpoint || "";
-const clientId: string = inquiry.clientId || "";
-const turnstileSiteKey: string = inquiry.turnstileSiteKey || "";
-const configured = Boolean(workerEndpoint && turnstileSiteKey && clientId);
+const formUrl: string = (site as any).googleFormEmbedUrl || "";
+const turnstileSiteKey: string = (site as any).turnstileSiteKey || "";
 ---
 
 <div
@@ -29,7 +23,7 @@ const configured = Boolean(workerEndpoint && turnstileSiteKey && clientId);
   aria-modal="true"
   aria-labelledby="inquiry-popup-title"
 >
-  <div class="relative max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+  <div class="relative max-w-3xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[92vh] max-h-[92vh]">
     <button
       type="button"
       data-popup-close
@@ -39,7 +33,7 @@ const configured = Boolean(workerEndpoint && turnstileSiteKey && clientId);
       ×
     </button>
 
-    <!-- Header -->
+    <!-- Header — compact so iframe gets more height -->
     <div class="bg-gradient-to-br from-[var(--color-brand)] to-[var(--color-brand-dark)] text-white px-6 md:px-7 py-4 shrink-0">
       <p class="text-[10px] tracking-[0.3em] font-bold opacity-90 uppercase">
         {popup.kicker}
@@ -55,14 +49,14 @@ const configured = Boolean(workerEndpoint && turnstileSiteKey && clientId);
     </div>
 
     <!-- Body -->
-    <div class="flex-1 overflow-y-auto px-5 md:px-6 py-4">
+    <div class="flex-1 flex flex-col min-h-0 px-4 md:px-5 py-3">
       <!-- Proposal download (compact) -->
       {popup.proposalHref && (
         <a
           href={popup.proposalHref}
           target="_blank"
           rel="noopener"
-          class="mb-4 flex items-center gap-3 rounded-xl bg-stone-50 border border-stone-200 px-3 py-2 hover:border-[var(--color-brand)] hover:bg-white transition group"
+          class="shrink-0 mb-3 flex items-center gap-3 rounded-xl bg-stone-50 border border-stone-200 px-3 py-2 hover:border-[var(--color-brand)] hover:bg-white transition group"
         >
           <span class="inline-flex w-8 h-8 items-center justify-center rounded-full bg-[var(--color-brand)] text-white shrink-0">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -76,140 +70,60 @@ const configured = Boolean(workerEndpoint && turnstileSiteKey && clientId);
         </a>
       )}
 
-      {configured ? (
-        <form
-          data-inquiry-form
-          data-worker-endpoint={workerEndpoint}
-          data-client-id={clientId}
-          data-lang={lang}
-          class="space-y-3"
-          novalidate
+      {formUrl ? (
+        <div
+          class="flex-1 min-h-0 rounded-xl overflow-hidden border border-stone-200 flex flex-col"
+          data-inquiry-gate
+          data-form-url={formUrl}
         >
-          <!-- Honeypot: hidden from real users, bots will fill it. Server discards. -->
-          <div class="absolute -left-[9999px] w-0 h-0 overflow-hidden" aria-hidden="true">
-            <label>
-              Website
-              <input type="text" name="website" tabindex="-1" autocomplete="off" />
-            </label>
-          </div>
+          {turnstileSiteKey ? (
+            <!-- Turnstile gate: shows first; iframe is hidden until verified -->
+            <div data-inquiry-challenge class="flex-1 flex flex-col items-center justify-center gap-4 p-6 text-center">
+              <div class="space-y-1">
+                <p class="text-sm font-bold text-stone-900">
+                  {t ? "Quick security check" : "잠시만요, 봇 방지 확인이 필요해요"}
+                </p>
+                <p class="text-xs text-stone-500">
+                  {t ? "Please complete the check to load the inquiry form." : "확인을 완료하시면 문의 양식이 표시됩니다."}
+                </p>
+              </div>
+              <div
+                class="cf-turnstile"
+                data-sitekey={turnstileSiteKey}
+                data-theme="light"
+                data-callback="onInquiryTurnstileSuccess"
+              ></div>
+            </div>
+          ) : null}
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <label class="block">
-              <span class="block text-xs font-bold text-stone-600 mb-1">
-                {copy.fields.name.label} <span class="text-[var(--color-brand)]">*</span>
-              </span>
-              <input
-                type="text"
-                name="name"
-                required
-                placeholder={copy.fields.name.placeholder}
-                class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-[var(--color-brand)] focus:ring-2 focus:ring-[var(--color-brand)]/20 outline-none transition"
-              />
-            </label>
-            <label class="block">
-              <span class="block text-xs font-bold text-stone-600 mb-1">
-                {copy.fields.phone.label} <span class="text-[var(--color-brand)]">*</span>
-              </span>
-              <input
-                type="tel"
-                name="phone"
-                required
-                placeholder={copy.fields.phone.placeholder}
-                class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-[var(--color-brand)] focus:ring-2 focus:ring-[var(--color-brand)]/20 outline-none transition"
-              />
-            </label>
-          </div>
-
-          <label class="block">
-            <span class="block text-xs font-bold text-stone-600 mb-1">
-              {copy.fields.email.label}
-            </span>
-            <input
-              type="email"
-              name="email"
-              placeholder={copy.fields.email.placeholder}
-              class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-[var(--color-brand)] focus:ring-2 focus:ring-[var(--color-brand)]/20 outline-none transition"
-            />
-          </label>
-
-          <label class="block">
-            <span class="block text-xs font-bold text-stone-600 mb-1">
-              {copy.fields.region.label} <span class="text-[var(--color-brand)]">*</span>
-            </span>
-            <input
-              type="text"
-              name="region"
-              required
-              placeholder={copy.fields.region.placeholder}
-              class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-[var(--color-brand)] focus:ring-2 focus:ring-[var(--color-brand)]/20 outline-none transition"
-            />
-          </label>
-
-          <label class="block">
-            <span class="block text-xs font-bold text-stone-600 mb-1">
-              {copy.fields.message.label} <span class="text-[var(--color-brand)]">*</span>
-            </span>
-            <textarea
-              name="message"
-              required
-              rows="4"
-              placeholder={copy.fields.message.placeholder}
-              class="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-[var(--color-brand)] focus:ring-2 focus:ring-[var(--color-brand)]/20 outline-none transition resize-none"
-            ></textarea>
-          </label>
-
-          <label class="flex items-start gap-2 text-xs text-stone-700">
-            <input
-              type="checkbox"
-              name="consent"
-              required
-              class="mt-0.5 w-4 h-4 rounded border-stone-300 text-[var(--color-brand)] focus:ring-[var(--color-brand)]/30"
-            />
-            <span>{copy.consent}</span>
-          </label>
-
-          <!-- Cloudflare Turnstile widget -->
-          <div
-            class="cf-turnstile"
-            data-sitekey={turnstileSiteKey}
-            data-theme="light"
-            data-size="flexible"
-          ></div>
-
-          <!-- Status message -->
-          <div data-inquiry-status class="hidden text-sm rounded-lg px-3 py-2"></div>
-
-          <button
-            type="submit"
-            data-inquiry-submit
-            data-label-default={copy.submit}
-            data-label-submitting={copy.submitting}
-            data-success={copy.success}
-            data-error-generic={copy.errorGeneric}
-            data-error-turnstile={copy.errorTurnstile}
-            data-error-ratelimit={copy.errorRateLimit}
-            data-error-consent={copy.errorConsent}
-            class="w-full rounded-lg bg-[var(--color-brand)] hover:bg-[var(--color-brand-dark)] text-white font-bold py-3 transition disabled:opacity-60 disabled:cursor-not-allowed"
+          <!-- Google Forms iframe — only revealed after Turnstile passes (or always, if no key configured) -->
+          <iframe
+            data-inquiry-iframe
+            data-src={formUrl}
+            src={turnstileSiteKey ? "about:blank" : formUrl}
+            class={`w-full h-full block ${turnstileSiteKey ? "hidden" : ""}`}
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            title={t ? "Inquiry form" : "문의 양식"}
           >
-            {copy.submit}
-          </button>
-        </form>
+            {t ? "Loading…" : "불러오는 중…"}
+          </iframe>
+        </div>
       ) : (
         <div class="rounded-xl bg-amber-50 border border-amber-200 p-5 text-sm text-amber-800">
           {t ? (
             <>
               <p class="font-semibold">Inquiry form not yet configured.</p>
               <p class="mt-1">
-                Configure <code>inquiry.workerEndpoint</code>, <code>inquiry.clientId</code>,
-                and <code>inquiry.turnstileSiteKey</code> in <code>site.json</code>.
+                Paste your Google Form embed URL into <code>googleFormEmbedUrl</code> in <code>site.json</code>.
               </p>
             </>
           ) : (
             <>
               <p class="font-semibold">문의 양식이 아직 설정되지 않았습니다.</p>
               <p class="mt-1">
-                <code>site.json</code>의 <code>inquiry</code> 항목에
-                Worker 엔드포인트, 클라이언트 ID, Turnstile Site Key를 입력해 주세요.
+                <code>site.json</code>의 <code>googleFormEmbedUrl</code>에 Google Form 주소를 입력해 주세요.
               </p>
             </>
           )}
@@ -230,7 +144,23 @@ const configured = Boolean(workerEndpoint && turnstileSiteKey && clientId);
   </div>
 </div>
 
-<!-- Turnstile API: loads on every page that uses this component -->
+<!-- Turnstile callback — reveals the iframe and loads it on demand -->
+<script is:inline>
+  window.onInquiryTurnstileSuccess = function () {
+    var gate = document.querySelector('[data-inquiry-gate]');
+    if (!gate) return;
+    var challenge = gate.querySelector('[data-inquiry-challenge]');
+    var iframe = gate.querySelector('[data-inquiry-iframe]');
+    if (challenge) challenge.classList.add('hidden');
+    if (iframe) {
+      var url = iframe.getAttribute('data-src');
+      if (url && iframe.getAttribute('src') !== url) iframe.setAttribute('src', url);
+      iframe.classList.remove('hidden');
+    }
+  };
+</script>
+
+<!-- Cloudflare Turnstile API (loaded only when popup component is on the page) -->
 <script
   is:inline
   src="https://challenges.cloudflare.com/turnstile/v0/api.js"

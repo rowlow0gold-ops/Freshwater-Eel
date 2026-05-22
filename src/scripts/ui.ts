@@ -225,58 +225,6 @@ function initPopup() {
   });
 }
 
-function initInquiryForm() {
-  const form = document.querySelector<HTMLFormElement>("[data-inquiry-form]");
-  if (!form) return;
-  const status = form.querySelector<HTMLElement>("[data-inquiry-status]");
-  const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!status || !submit) return;
-
-    const formData = new FormData(form);
-    const accessKey = String(formData.get("access_key") || "");
-    if (!accessKey || accessKey.includes("REPLACE_WITH")) {
-      status.textContent =
-        "관리자에게 문의해주세요 (Web3Forms 액세스 키 미설정). / Please contact admin — Web3Forms key not set.";
-      status.classList.remove("hidden", "text-emerald-600");
-      status.classList.add("text-amber-600");
-      return;
-    }
-
-    submit.disabled = true;
-    const originalLabel = submit.textContent;
-    submit.textContent = "전송중... / Sending...";
-
-    try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await res.json();
-      if (data.success) {
-        status.textContent =
-          "문의가 정상적으로 접수되었습니다. 빠른 시일 내 회신드리겠습니다. / Your inquiry has been sent. We will reply soon.";
-        status.classList.remove("hidden", "text-amber-600", "text-rose-600");
-        status.classList.add("text-emerald-600");
-        form.reset();
-      } else {
-        throw new Error(data.message || "전송 실패");
-      }
-    } catch (err) {
-      console.error(err);
-      status.textContent =
-        "전송에 실패했습니다. 잠시 후 다시 시도해주세요. / Submission failed. Please try again later.";
-      status.classList.remove("hidden", "text-emerald-600", "text-amber-600");
-      status.classList.add("text-rose-600");
-    } finally {
-      submit.disabled = false;
-      submit.textContent = originalLabel;
-    }
-  });
-}
-
 function initHeroVideoRotator() {
   const rotator = document.querySelector<HTMLElement>("[data-hero-rotator]");
   if (!rotator) return;
@@ -347,7 +295,6 @@ function init() {
   initCountUp();
   initParallax();
   initPopup();
-  initInquiryForm();
   initHeroVideoRotator();
 }
 

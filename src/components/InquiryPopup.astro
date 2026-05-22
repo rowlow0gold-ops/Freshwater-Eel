@@ -12,37 +12,7 @@ const popup = (lang === "en" ? popupEn : popupKo).inquiry;
 const site = lang === "en" ? siteEn : siteKo;
 const t = lang === "en";
 
-const countries = [
-  { code: "KR", labelKo: "대한민국", labelEn: "Republic of Korea" },
-  { code: "JP", labelKo: "일본", labelEn: "Japan" },
-  { code: "CN", labelKo: "중국", labelEn: "China" },
-  { code: "TW", labelKo: "대만", labelEn: "Taiwan" },
-  { code: "HK", labelKo: "홍콩", labelEn: "Hong Kong" },
-  { code: "SG", labelKo: "싱가포르", labelEn: "Singapore" },
-  { code: "MY", labelKo: "말레이시아", labelEn: "Malaysia" },
-  { code: "TH", labelKo: "태국", labelEn: "Thailand" },
-  { code: "VN", labelKo: "베트남", labelEn: "Vietnam" },
-  { code: "ID", labelKo: "인도네시아", labelEn: "Indonesia" },
-  { code: "PH", labelKo: "필리핀", labelEn: "Philippines" },
-  { code: "US", labelKo: "미국", labelEn: "United States" },
-  { code: "CA", labelKo: "캐나다", labelEn: "Canada" },
-  { code: "GB", labelKo: "영국", labelEn: "United Kingdom" },
-  { code: "DE", labelKo: "독일", labelEn: "Germany" },
-  { code: "FR", labelKo: "프랑스", labelEn: "France" },
-  { code: "AU", labelKo: "호주", labelEn: "Australia" },
-  { code: "NZ", labelKo: "뉴질랜드", labelEn: "New Zealand" },
-  { code: "AE", labelKo: "아랍에미리트", labelEn: "United Arab Emirates" },
-  { code: "SA", labelKo: "사우디아라비아", labelEn: "Saudi Arabia" },
-  { code: "OTHER", labelKo: "기타", labelEn: "Other" },
-];
-
-const types = [
-  { value: "domestic-franchise",      labelKo: "국내 가맹 창업 문의",   labelEn: "Domestic franchise inquiry" },
-  { value: "international-franchise", labelKo: "해외 마스터 / 가맹 문의", labelEn: "International master franchise" },
-  { value: "partnership",             labelKo: "업무제휴 및 협업",       labelEn: "Business partnership" },
-  { value: "disclosure",              labelKo: "정보 공개서 신청",       labelEn: "Information disclosure request" },
-  { value: "other",                   labelKo: "기타 문의",              labelEn: "Other" },
-];
+const formUrl: string = (site as any).googleFormEmbedUrl || "";
 ---
 
 <div
@@ -52,7 +22,7 @@ const types = [
   aria-modal="true"
   aria-labelledby="inquiry-popup-title"
 >
-  <div class="relative max-w-xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+  <div class="relative max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
     <button
       type="button"
       data-popup-close
@@ -80,7 +50,7 @@ const types = [
       </p>
     </div>
 
-    <!-- Scrollable form body -->
+    <!-- Body -->
     <div class="flex-1 overflow-y-auto px-6 md:px-7 py-5">
       <!-- Proposal download -->
       {popup.proposalHref && (
@@ -105,108 +75,42 @@ const types = [
         </a>
       )}
 
-      <form
-        data-inquiry-form
-        action="https://api.web3forms.com/submit"
-        method="POST"
-        class="grid gap-4"
-      >
-        <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
-        <input type="hidden" name="subject" value="[본가민물장어] 신규 사업 문의" />
-        <input type="hidden" name="from_name" value="bonga-eel.site" />
-        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
-
-        <div class="grid gap-3 sm:grid-cols-2">
-          <label class="grid gap-1 text-xs font-semibold text-stone-700">
-            {t ? "Name" : "이름 / Name"}
-            <input
-              type="text"
-              name="name"
-              required
-              class="rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal text-stone-900 focus:outline-none focus:border-[var(--color-brand)]"
-              placeholder={t ? "John Doe" : "홍길동 / John Doe"}
-            />
-          </label>
-          <label class="grid gap-1 text-xs font-semibold text-stone-700">
-            {t ? "Country" : "국가 / Country"}
-            <select
-              name="country"
-              required
-              class="rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal text-stone-900 focus:outline-none focus:border-[var(--color-brand)]"
-            >
-              {countries.map((c) => (
-                <option value={c.code}>{t ? c.labelEn : `${c.labelKo} / ${c.labelEn}`}</option>
-              ))}
-            </select>
-          </label>
-          <label class="grid gap-1 text-xs font-semibold text-stone-700">
-            {t ? "Phone" : "연락처 / Phone"}
-            <input
-              type="tel"
-              name="phone"
-              required
-              class="rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal text-stone-900 focus:outline-none focus:border-[var(--color-brand)]"
-              placeholder="+82 10-1234-5678"
-            />
-          </label>
-          <label class="grid gap-1 text-xs font-semibold text-stone-700">
-            {t ? "Email" : "이메일 / Email"}
-            <input
-              type="email"
-              name="email"
-              required
-              class="rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal text-stone-900 focus:outline-none focus:border-[var(--color-brand)]"
-              placeholder="name@example.com"
-            />
-          </label>
-        </div>
-
-        <label class="grid gap-1 text-xs font-semibold text-stone-700">
-          {t ? "Inquiry type" : "문의 유형 / Inquiry type"}
-          <select
-            name="type"
-            required
-            class="rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal text-stone-900 focus:outline-none focus:border-[var(--color-brand)]"
+      <!-- Google Forms iframe -->
+      {formUrl ? (
+        <div class="rounded-xl overflow-hidden border border-stone-200">
+          <iframe
+            src={formUrl}
+            width="100%"
+            height="640"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            title={t ? "Inquiry form" : "문의 양식"}
           >
-            {types.map((ty) => (
-              <option value={ty.value}>{t ? ty.labelEn : `${ty.labelKo} · ${ty.labelEn}`}</option>
-            ))}
-          </select>
-        </label>
-
-        <label class="grid gap-1 text-xs font-semibold text-stone-700">
-          {t ? "Message" : "내용 / Message"}
-          <textarea
-            name="message"
-            rows="4"
-            required
-            class="rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal text-stone-900 focus:outline-none focus:border-[var(--color-brand)] resize-none"
-            placeholder={t
-              ? "Tell us about your region, plans, and questions."
-              : "검토 중인 지역, 운영 계획, 문의 내용을 자유롭게 적어주세요."}
-          ></textarea>
-        </label>
-
-        <label class="flex items-start gap-2 text-[11px] text-stone-500">
-          <input type="checkbox" required class="mt-0.5" />
-          <span>
-            {t ? "I agree to the " : "개인정보처리방침에 동의합니다. / I agree to the "}
-            <button type="button" data-popup-open="privacy" class="underline text-[var(--color-brand)] hover:text-[var(--color-brand-dark)]">
-              {t ? "privacy policy" : "개인정보처리방침"}
-            </button>
-            .
-          </span>
-        </label>
-
-        <button
-          type="submit"
-          class="rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-bold text-white hover:bg-[var(--color-brand-dark)] transition"
-        >
-          {t ? "Send inquiry" : "문의 보내기 / Send inquiry"}
-        </button>
-
-        <p data-inquiry-status class="hidden text-xs font-semibold"></p>
-      </form>
+            {t ? "Loading…" : "불러오는 중…"}
+          </iframe>
+        </div>
+      ) : (
+        <div class="rounded-xl bg-amber-50 border border-amber-200 p-5 text-sm text-amber-800">
+          {t ? (
+            <>
+              <p class="font-semibold">Inquiry form not yet configured.</p>
+              <p class="mt-1">
+                Paste your Google Form embed URL into <code>googleFormEmbedUrl</code> in the CMS
+                (Site → 기본 정보), then submissions will land in your Google Sheets.
+              </p>
+            </>
+          ) : (
+            <>
+              <p class="font-semibold">문의 양식이 아직 설정되지 않았습니다.</p>
+              <p class="mt-1">
+                CMS의 <strong>기본 정보 → Google Form 임베드 URL</strong> 항목에
+                Google Form 주소를 입력해 주세요. 입력 즉시 Google Sheets로 문의가 수집됩니다.
+              </p>
+            </>
+          )}
+        </div>
+      )}
     </div>
 
     <!-- Footer button (no hide-1d) -->

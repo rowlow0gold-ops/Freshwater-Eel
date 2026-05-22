@@ -38,7 +38,7 @@ collections:
           - { name: email, label: 이메일, widget: string }
           - { name: kakaoChannelUrl, label: 카카오 채널 URL, widget: string, required: false }
           - { name: instagramUrl, label: 인스타그램 URL, widget: string, required: false }
-          - { name: web3formsAccessKey, label: Web3Forms 액세스 키, widget: string }
+          - { name: googleFormEmbedUrl, label: 문의 Google Form 임베드 URL (Send → Embed iframe src), widget: string, required: false }
           - { name: mapEmbedUrl, label: 본점 지도 embed URL, widget: string }
           - name: company
             label: 회사 정보

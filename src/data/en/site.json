@@ -9,7 +9,11 @@
   "email": "global@bongafood.co.kr",
   "kakaoChannelUrl": "https://pf.kakao.com/_REPLACE_WITH_CHANNEL",
   "instagramUrl": "https://www.instagram.com/bonga_eel",
-  "googleFormEmbedUrl": "https://docs.google.com/forms/d/e/1FAIpQLSeNiEe2imesT0GLSX05zNYXtibGZTsxNth0enGeMwZEMkPMGw/viewform?embedded=true",
+  "inquiry": {
+    "clientId": "bongaeel",
+    "workerEndpoint": "https://inquiry-handler.rowlow302606.workers.dev/inquiry",
+    "turnstileSiteKey": "0x4AAAAAADUW6VI7hANmDtLo"
+  },
   "mapEmbedUrl": "https://www.google.com/maps?q=145+Gwanggyo+Jungang-ro+Yeongtong-gu+Suwon&output=embed",
   "company": {
     "name": "Bonga Food Co., Ltd.",

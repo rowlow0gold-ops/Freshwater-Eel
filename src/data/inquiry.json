@@ -1,0 +1,37 @@
+{
+  "fields": {
+    "name": {
+      "label": "이름",
+      "placeholder": "홍길동",
+      "required": true
+    },
+    "phone": {
+      "label": "연락처",
+      "placeholder": "010-1234-5678",
+      "required": true
+    },
+    "email": {
+      "label": "이메일 (선택)",
+      "placeholder": "you@example.com",
+      "required": false
+    },
+    "region": {
+      "label": "관심 지역",
+      "placeholder": "예: 서울 강남, 경기 수원",
+      "required": true
+    },
+    "message": {
+      "label": "문의 내용",
+      "placeholder": "창업 계획, 점포 상황, 일정 등을 알려주세요.",
+      "required": true
+    }
+  },
+  "consent": "개인정보 수집·이용에 동의합니다. (창업 문의 응대 목적, 1년 보관)",
+  "submit": "문의 보내기",
+  "submitting": "전송 중...",
+  "success": "문의가 정상적으로 접수되었습니다. 빠르게 연락드리겠습니다.",
+  "errorGeneric": "전송에 실패했습니다. 잠시 후 다시 시도해 주세요.",
+  "errorTurnstile": "보안 인증을 완료해 주세요.",
+  "errorRateLimit": "잠시 후 다시 시도해 주세요. 같은 IP에서 너무 많은 요청이 발생했습니다.",
+  "errorConsent": "개인정보 수집·이용 동의가 필요합니다."
+}

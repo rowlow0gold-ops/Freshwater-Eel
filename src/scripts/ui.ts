@@ -287,6 +287,120 @@ function initHeroVideoRotator() {
   setInterval(advance, interval);
 }
 
+function initInquiryForm() {
+  const forms = Array.from(document.querySelectorAll<HTMLFormElement>("[data-inquiry-form]"));
+  if (!forms.length) return;
+
+  forms.forEach((form) => {
+    const endpoint = form.dataset.workerEndpoint || "";
+    const clientId = form.dataset.clientId || "";
+    if (!endpoint || !clientId) return;
+
+    const submitBtn = form.querySelector<HTMLButtonElement>("[data-inquiry-submit]");
+    const statusEl = form.querySelector<HTMLElement>("[data-inquiry-status]");
+
+    const labels = {
+      default: submitBtn?.dataset.labelDefault || "Send",
+      submitting: submitBtn?.dataset.labelSubmitting || "Sending...",
+      success: submitBtn?.dataset.success || "Submitted.",
+      errorGeneric: submitBtn?.dataset.errorGeneric || "Submission failed.",
+      errorTurnstile: submitBtn?.dataset.errorTurnstile || "Please complete the security check.",
+      errorRateLimit: submitBtn?.dataset.errorRatelimit || "Too many requests.",
+      errorConsent: submitBtn?.dataset.errorConsent || "Please accept the consent.",
+    };
+
+    const setStatus = (msg: string, kind: "ok" | "err" | null) => {
+      if (!statusEl) return;
+      if (!kind || !msg) {
+        statusEl.classList.add("hidden");
+        statusEl.textContent = "";
+        return;
+      }
+      statusEl.textContent = msg;
+      statusEl.classList.remove("hidden", "bg-emerald-50", "text-emerald-800", "border-emerald-200", "bg-rose-50", "text-rose-800", "border-rose-200");
+      if (kind === "ok") {
+        statusEl.classList.add("bg-emerald-50", "text-emerald-800", "border", "border-emerald-200");
+      } else {
+        statusEl.classList.add("bg-rose-50", "text-rose-800", "border", "border-rose-200");
+      }
+    };
+
+    const setLoading = (loading: boolean) => {
+      if (!submitBtn) return;
+      submitBtn.disabled = loading;
+      submitBtn.textContent = loading ? labels.submitting : labels.default;
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      setStatus("", null);
+
+      const formData = new FormData(form);
+
+      // Honeypot — if a bot filled this hidden field, fake a success and skip.
+      const honey = String(formData.get("website") || "").trim();
+      if (honey) {
+        setStatus(labels.success, "ok");
+        form.reset();
+        return;
+      }
+
+      // Consent
+      if (!formData.get("consent")) {
+        setStatus(labels.errorConsent, "err");
+        return;
+      }
+
+      // Turnstile token
+      const turnstileToken = String(formData.get("cf-turnstile-response") || "").trim();
+      if (!turnstileToken) {
+        setStatus(labels.errorTurnstile, "err");
+        return;
+      }
+
+      const payload = {
+        clientId,
+        name: String(formData.get("name") || "").trim(),
+        phone: String(formData.get("phone") || "").trim(),
+        email: String(formData.get("email") || "").trim(),
+        region: String(formData.get("region") || "").trim(),
+        message: String(formData.get("message") || "").trim(),
+        turnstileToken,
+      };
+
+      setLoading(true);
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          setStatus(labels.success, "ok");
+          form.reset();
+          // Reset Turnstile so user gets a fresh token next time.
+          try {
+            const ts = (window as unknown as { turnstile?: { reset: (el?: Element) => void } }).turnstile;
+            const widget = form.querySelector<HTMLElement>(".cf-turnstile");
+            if (ts && widget) ts.reset(widget);
+          } catch { /* ignore */ }
+        } else if (res.status === 429) {
+          setStatus(labels.errorRateLimit, "err");
+        } else if (res.status === 403) {
+          setStatus(labels.errorTurnstile, "err");
+        } else {
+          setStatus(labels.errorGeneric, "err");
+        }
+      } catch {
+        setStatus(labels.errorGeneric, "err");
+      } finally {
+        setLoading(false);
+      }
+    });
+  });
+}
+
 function init() {
   initScrollReveal();
   initHeaderScrollState();
@@ -296,6 +410,7 @@ function init() {
   initParallax();
   initPopup();
   initHeroVideoRotator();
+  initInquiryForm();
 }
 
 if (document.readyState === "loading") {

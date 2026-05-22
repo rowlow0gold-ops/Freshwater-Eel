@@ -1,0 +1,37 @@
+{
+  "fields": {
+    "name": {
+      "label": "Name",
+      "placeholder": "Jane Doe",
+      "required": true
+    },
+    "phone": {
+      "label": "Phone",
+      "placeholder": "+82 10-1234-5678",
+      "required": true
+    },
+    "email": {
+      "label": "Email (optional)",
+      "placeholder": "you@example.com",
+      "required": false
+    },
+    "region": {
+      "label": "Region of interest",
+      "placeholder": "e.g. Seoul Gangnam, Gyeonggi Suwon",
+      "required": true
+    },
+    "message": {
+      "label": "Message",
+      "placeholder": "Tell us about your franchise plan, location, timeline, etc.",
+      "required": true
+    }
+  },
+  "consent": "I agree to the collection and use of personal data for franchise inquiry handling (retained 1 year).",
+  "submit": "Send inquiry",
+  "submitting": "Sending...",
+  "success": "Your inquiry has been received. We'll get back to you shortly.",
+  "errorGeneric": "Submission failed. Please try again in a moment.",
+  "errorTurnstile": "Please complete the security check.",
+  "errorRateLimit": "Too many requests from your network. Please try again later.",
+  "errorConsent": "Please accept the personal data consent."
+}

@@ -13,8 +13,8 @@ const strategy = lang === "en" ? strategyEn : strategyKo;
     <div
       data-parallax
       data-parallax-speed="0.12"
-      class="absolute inset-0 -top-16 -bottom-16 bg-cover bg-center opacity-30"
-      style={`background-image: url(${strategy.bgImage})`}
+      data-bg-src={strategy.bgImage}
+      class="absolute inset-0 -top-16 -bottom-16 bg-cover bg-center opacity-30 bg-stone-900"
     ></div>
     <div class="absolute inset-0 bg-gradient-to-b from-stone-950/85 via-stone-950/95 to-stone-950"></div>
   </div>

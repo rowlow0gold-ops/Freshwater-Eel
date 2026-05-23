@@ -1,6 +1,7 @@
 ---
 import menuKo from "../data/menu.json";
 import menuEn from "../data/en/menu.json";
+import { pexelsSrc, pexelsSrcset } from "../lib/pexels";
 
 interface Props { lang?: "ko" | "en"; }
 const { lang = "ko" } = Astro.props;
@@ -97,9 +98,12 @@ const menu = lang === "en" ? menuEn : menuKo;
                       </>
                     ) : (
                       <img
-                        src={(item as any).image}
+                        src={pexelsSrc((item as any).image, 600)}
+                        srcset={pexelsSrcset((item as any).image, [320, 600, 900])}
+                        sizes="(min-width: 768px) 33vw, 50vw"
                         alt={item.name}
                         loading="lazy"
+                        decoding="async"
                         class="w-full h-full object-cover"
                       />
                     )}

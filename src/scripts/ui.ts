@@ -432,6 +432,60 @@ function initInquiryForm() {
   });
 }
 
+/**
+ * Lazy + responsive CSS background-images.
+ *
+ * Sections with `data-bg-src="..."` (instead of inline `style=background-image`)
+ * defer their image download until they're near the viewport. We also rewrite
+ * the Pexels `w=` param to serve a smaller URL on mobile (~600px) than on
+ * desktop (~1200px). Saves a couple MB on initial mobile load.
+ */
+function initLazyBackgrounds() {
+  const targets = document.querySelectorAll<HTMLElement>("[data-bg-src]");
+  if (!targets.length) return;
+
+  const isMobile =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(max-width: 767px)").matches;
+
+  const reshape = (url: string): string => {
+    if (!url || !url.includes("images.pexels.com")) return url;
+    try {
+      const u = new URL(url);
+      u.searchParams.set("w", isMobile ? "600" : "1200");
+      u.searchParams.delete("h"); // let aspect ratio follow the new width
+      return u.toString();
+    } catch {
+      return url;
+    }
+  };
+
+  const apply = (el: HTMLElement) => {
+    const src = el.dataset.bgSrc;
+    if (!src) return;
+    el.style.backgroundImage = `url("${reshape(src)}")`;
+    el.removeAttribute("data-bg-src");
+  };
+
+  if (typeof IntersectionObserver !== "function") {
+    targets.forEach((el) => apply(el));
+    return;
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          apply(e.target as HTMLElement);
+          io.unobserve(e.target);
+        }
+      }
+    },
+    { rootMargin: "300px" },
+  );
+  targets.forEach((el) => io.observe(el));
+}
+
 function init() {
   initScrollReveal();
   initHeaderScrollState();
@@ -442,6 +496,7 @@ function init() {
   initPopup();
   initHeroVideoRotator();
   initInquiryForm();
+  initLazyBackgrounds();
 }
 
 if (document.readyState === "loading") {

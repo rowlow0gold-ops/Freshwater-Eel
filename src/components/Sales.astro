@@ -17,8 +17,8 @@ const peakLabel = lang === "en" ? "peak daily revenue" : "최고 일매출";
     <div
       data-parallax
       data-parallax-speed="0.08"
-      class="absolute inset-0 -top-16 -bottom-16 bg-cover bg-center opacity-15"
-      style={`background-image: url(${site.salesBg})`}
+      data-bg-src={site.salesBg}
+      class="absolute inset-0 -top-16 -bottom-16 bg-cover bg-center opacity-15 bg-stone-200"
     ></div>
     <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-cream)] via-[var(--color-cream)]/90 to-[var(--color-cream)]"></div>
   </div>

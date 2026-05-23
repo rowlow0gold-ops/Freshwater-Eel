@@ -1,6 +1,7 @@
 ---
 import siteKo from "../data/site.json";
 import siteEn from "../data/en/site.json";
+import { pexelsSrc, pexelsSrcset } from "../lib/pexels";
 
 interface Props { lang?: "ko" | "en"; }
 const { lang = "ko" } = Astro.props;
@@ -34,9 +35,12 @@ const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
     <!-- Solid black behind videos so non-loaded ones don't bleed through -->
     <div class="absolute inset-0 bg-stone-950"></div>
 
-    <!-- Mobile fallback: static hero image. Hidden on md+ where videos take over. -->
+    <!-- Mobile fallback: static hero image. Hidden on md+ where videos take over.
+         Served at 800w (mobile-appropriate) with a small srcset so 2x phones get 1200w. -->
     <img
-      src={site.hero.bgImage}
+      src={pexelsSrc(site.hero.bgImage, 800)}
+      srcset={pexelsSrcset(site.hero.bgImage, [480, 800, 1200])}
+      sizes="100vw"
       alt=""
       aria-hidden="true"
       fetchpriority="high"

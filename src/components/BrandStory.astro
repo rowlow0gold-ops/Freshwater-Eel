@@ -1,6 +1,7 @@
 ---
 import siteKo from "../data/site.json";
 import siteEn from "../data/en/site.json";
+import { pexelsSrc, pexelsSrcset } from "../lib/pexels";
 
 interface Props { lang?: "ko" | "en"; }
 const { lang = "ko" } = Astro.props;
@@ -11,9 +12,12 @@ const site = lang === "en" ? siteEn : siteKo;
   <div class="mx-auto max-w-6xl px-4 grid gap-12 md:grid-cols-2 items-center">
     <div class="zoom-on-hover reveal rounded-3xl overflow-hidden ring-1 ring-stone-200 shadow-xl">
       <img
-        src={site.brand.image}
+        src={pexelsSrc(site.brand.image, 800)}
+        srcset={pexelsSrcset(site.brand.image)}
+        sizes="(min-width: 768px) 50vw, 100vw"
         alt={site.name}
         loading="lazy"
+        decoding="async"
         class="w-full h-full object-cover aspect-[4/3]"
       />
     </div>

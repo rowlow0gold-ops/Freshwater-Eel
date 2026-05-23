@@ -10,9 +10,6 @@ const site = lang === "en" ? siteEn : siteKo;
 const videos: string[] = Array.isArray((site.hero as any).bgVideos)
   ? (site.hero as any).bgVideos
   : [];
-const heroImages: string[] = Array.isArray((site.hero as any).bgImages) && (site.hero as any).bgImages.length > 0
-  ? (site.hero as any).bgImages
-  : [site.hero.bgImage];
 const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
 ---
 
@@ -40,30 +37,17 @@ const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
     <!-- Solid black behind videos so non-loaded ones don't bleed through -->
     <div class="absolute inset-0 bg-stone-950"></div>
 
-    <!-- Mobile: rotating <img> stack. Hidden on md+ where videos take over.
-         First image is 480w (matches the rel=preload hint in Layout) so the
-         browser uses the preloaded bytes without re-fetching at a higher
-         resolution. 2x phones get 800w via srcset. -->
-    <div class="md:hidden absolute inset-0" data-hero-img-rotator data-interval={intervalMs}>
-      {heroImages.map((url, i) => (
-        <img
-          data-hero-img={i}
-          src={i === 0 ? pexelsSrc(url, 480) : undefined}
-          data-src={pexelsSrc(url, 480)}
-          srcset={i === 0 ? pexelsSrcset(url, [480, 800]) : undefined}
-          data-srcset={pexelsSrcset(url, [480, 800])}
-          sizes="100vw"
-          alt=""
-          aria-hidden="true"
-          fetchpriority={i === 0 ? "high" : undefined}
-          loading={i === 0 ? "eager" : "lazy"}
-          decoding="async"
-          class={`absolute inset-0 w-full h-full object-cover ${
-            i === 0 ? "opacity-100" : "opacity-0 transition-opacity duration-700 ease-out"
-          }`}
-        />
-      ))}
-    </div>
+    <!-- Mobile: single static hero image. Hidden on md+ where videos take over. -->
+    <img
+      src={pexelsSrc(site.hero.bgImage, 480)}
+      srcset={pexelsSrcset(site.hero.bgImage, [480, 800])}
+      sizes="100vw"
+      alt=""
+      aria-hidden="true"
+      fetchpriority="high"
+      decoding="async"
+      class="md:hidden absolute inset-0 w-full h-full object-cover"
+    />
 
     <!-- Desktop: rotating video stack. Hidden on mobile via the
          media-attr on <source> (so no fetch happens at all). -->

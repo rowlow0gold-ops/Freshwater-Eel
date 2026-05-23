@@ -6,6 +6,15 @@ import { pexelsSrc, pexelsSrcset } from "../lib/pexels";
 interface Props { lang?: "ko" | "en"; }
 const { lang = "ko" } = Astro.props;
 const site = lang === "en" ? siteEn : siteKo;
+
+// Extract the YouTube video ID from the embed URL so we can show a
+// thumbnail-only "facade" until the user clicks Play. Loading the real
+// iframe upfront costs ~900KB of YouTube player JS even when the user
+// never watches the clip; the facade defers all of that until click.
+const ytMatch = site.brand.videoUrl?.match(/\/embed\/([A-Za-z0-9_-]+)/);
+const ytId = ytMatch ? ytMatch[1] : null;
+const ytPoster = ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : null;
+const playLabel = lang === "en" ? "Play brand video" : "브랜드 영상 재생";
 ---
 
 <section class="py-24 bg-white">
@@ -33,17 +42,54 @@ const site = lang === "en" ? siteEn : siteKo;
     </div>
   </div>
 
-  {site.brand.videoUrl && (
+  {site.brand.videoUrl && ytId && (
     <div class="reveal mt-20 aspect-video max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-xl ring-1 ring-stone-200">
-      <iframe
-        src={site.brand.videoUrl}
-        title={lang === "en" ? "Brand video" : "브랜드 소개 영상"}
-        loading="lazy"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        class="w-full h-full"
-      ></iframe>
+      <button
+        type="button"
+        data-yt-facade={site.brand.videoUrl}
+        aria-label={playLabel}
+        class="group relative w-full h-full block cursor-pointer"
+      >
+        <img
+          src={ytPoster}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+        <span class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition">
+          <span class="flex items-center justify-center w-20 h-20 rounded-full bg-white/95 shadow-lg group-hover:scale-110 transition">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="text-[var(--color-brand)] ml-1" aria-hidden="true">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </span>
+        </span>
+      </button>
     </div>
   )}
 </section>
+
+<script is:inline>
+  // Swap the YouTube facade button for a real iframe on click.
+  // The iframe (and ~900KB of YouTube player JS) only loads on demand.
+  document.addEventListener("click", function (e) {
+    var t = e.target;
+    if (!t || !(t instanceof Element)) return;
+    var btn = t.closest("[data-yt-facade]");
+    if (!btn) return;
+    e.preventDefault();
+    var url = btn.getAttribute("data-yt-facade");
+    if (!url) return;
+    // Add autoplay so the click feels instant.
+    var sep = url.indexOf("?") >= 0 ? "&" : "?";
+    var src = url + sep + "autoplay=1";
+    var iframe = document.createElement("iframe");
+    iframe.src = src;
+    iframe.title = btn.getAttribute("aria-label") || "";
+    iframe.setAttribute("frameborder", "0");
+    iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+    iframe.setAttribute("allowfullscreen", "");
+    iframe.className = "w-full h-full";
+    btn.replaceWith(iframe);
+  });
+</script>

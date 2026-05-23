@@ -265,12 +265,13 @@ function initHeroVideoRotator() {
       setTimeout(cb, delay);
     }
   };
+  // Only the NEXT video (index 1) is proactively warmed up after page load,
+  // ~3 seconds in. Videos 2 and 3 wait until we're actually approaching them
+  // in the rotation cycle — see advance() below. This keeps the total
+  // initial network weight tiny so Lighthouse stops flagging
+  // "Avoid enormous network payloads".
   const startProgressivePreload = () => {
-    // Stagger so we don't blow the network budget right after page load.
-    videos.forEach((_, i) => {
-      if (i === 0) return;
-      schedule(() => preloadVideo(i), (i - 1) * 1500);
-    });
+    schedule(() => preloadVideo(1), 3000);
   };
   if (document.readyState === "complete") startProgressivePreload();
   else window.addEventListener("load", startProgressivePreload, { once: true });
@@ -311,6 +312,11 @@ function initHeroVideoRotator() {
     Promise.resolve(playPromise).then(() => {});
 
     current = next;
+
+    // Warm up the video that will come *after* the next one, so by the time
+    // its turn rolls around it's already decoded enough to play smoothly.
+    const peek = (next + 1) % videos.length;
+    if (peek !== 0) preloadVideo(peek);
   };
 
   setInterval(advance, interval);

@@ -58,8 +58,8 @@ const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
           fetchpriority={i === 0 ? "high" : undefined}
           loading={i === 0 ? "eager" : "lazy"}
           decoding="async"
-          class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
-            i === 0 ? "opacity-100" : "opacity-0"
+          class={`absolute inset-0 w-full h-full object-cover ${
+            i === 0 ? "opacity-100" : "opacity-0 transition-opacity duration-700 ease-out"
           }`}
         />
       ))}

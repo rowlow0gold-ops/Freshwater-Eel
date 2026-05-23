@@ -117,6 +117,10 @@ function initParallax() {
   const els = Array.from(document.querySelectorAll<HTMLElement>("[data-parallax]"));
   if (!els.length) return;
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  // Skip parallax on mobile/narrow screens: the constant scroll-driven
+  // transform writes are a major source of "Avoid non-composited animations"
+  // and main-thread work warnings on phones. Desktop keeps the effect.
+  if (matchMedia("(max-width: 767px)").matches) return;
   let ticking = false;
   const update = () => {
     const vh = window.innerHeight;

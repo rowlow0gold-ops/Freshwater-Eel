@@ -60,8 +60,12 @@ body {
   display: inline-flex;
   gap: 3rem;
   white-space: nowrap;
-  animation: marquee-scroll 30s linear infinite;
   will-change: transform;
+}
+@media (min-width: 768px) {
+  .marquee-track {
+    animation: marquee-scroll 30s linear infinite;
+  }
 }
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
@@ -78,12 +82,14 @@ body {
 @media (min-width: 768px) {
   .hero-waves { height: 110px; }
 }
-.hero-waves use {
-  animation: move-wave 9s -2s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+@media (min-width: 768px) {
+  .hero-waves use {
+    animation: move-wave 9s -2s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+  }
+  .hero-waves use:nth-child(2) { animation-duration: 11s; animation-delay: -3s; }
+  .hero-waves use:nth-child(3) { animation-duration: 14s; animation-delay: -4s; }
+  .hero-waves use:nth-child(4) { animation-duration: 20s; animation-delay: -5s; }
 }
-.hero-waves use:nth-child(2) { animation-duration: 11s; animation-delay: -3s; }
-.hero-waves use:nth-child(3) { animation-duration: 14s; animation-delay: -4s; }
-.hero-waves use:nth-child(4) { animation-duration: 20s; animation-delay: -5s; }
 @keyframes move-wave {
   0%   { transform: translate3d(-90px, 0, 0); }
   100% { transform: translate3d(85px, 0, 0); }

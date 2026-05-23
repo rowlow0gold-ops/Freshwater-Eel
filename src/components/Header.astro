@@ -20,7 +20,7 @@ const nav = [
   <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
     <a href={isEn ? "/en/" : "/"} class="flex items-baseline gap-2">
       <span class="text-xl font-extrabold text-[var(--color-brand)]">{site.name}</span>
-      <span class="hidden sm:inline text-xs tracking-widest text-stone-500">{site.nameEn}</span>
+      <span class="hidden sm:inline text-xs tracking-widest text-stone-600">{site.nameEn}</span>
     </a>
 
     <nav class="hidden lg:flex gap-7 text-sm font-semibold text-stone-700">
@@ -31,13 +31,19 @@ const nav = [
 
     <div class="flex items-center gap-2">
       <!-- Language switcher -->
-      <div class="hidden sm:flex items-center gap-1 text-xs font-bold text-stone-500 mr-1">
+      <div class="hidden sm:flex items-center gap-1 text-xs font-bold text-stone-600 mr-1" role="group" aria-label="Language">
         <a
           href="/"
+          hreflang="ko"
+          aria-label="한국어"
+          aria-current={!isEn ? "page" : undefined}
           class={`px-2 py-1 rounded ${!isEn ? "bg-stone-900 text-white" : "hover:text-[var(--color-brand)]"}`}
         >KO</a>
         <a
           href="/en/"
+          hreflang="en"
+          aria-label="English"
+          aria-current={isEn ? "page" : undefined}
           class={`px-2 py-1 rounded ${isEn ? "bg-stone-900 text-white" : "hover:text-[var(--color-brand)]"}`}
         >EN</a>
       </div>
@@ -53,9 +59,10 @@ const nav = [
         data-mobile-toggle
         aria-expanded="false"
         aria-controls="mobile-nav"
+        aria-label={isEn ? "Open menu" : "메뉴 열기"}
         class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-stone-300 text-stone-700"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
           <line x1="4" y1="6" x2="20" y2="6"/>
           <line x1="4" y1="12" x2="20" y2="12"/>
           <line x1="4" y1="18" x2="20" y2="18"/>
@@ -69,9 +76,21 @@ const nav = [
       {nav.map((n) => (
         <a href={n.href} class="rounded px-2 py-2 hover:bg-stone-100">{n.label}</a>
       ))}
-      <div class="flex gap-2 mt-2 text-xs font-bold">
-        <a href="/"    class={`flex-1 px-3 py-2 rounded text-center ${!isEn ? "bg-stone-900 text-white" : "bg-stone-100"}`}>KO</a>
-        <a href="/en/" class={`flex-1 px-3 py-2 rounded text-center ${isEn ? "bg-stone-900 text-white" : "bg-stone-100"}`}>EN</a>
+      <div class="flex gap-2 mt-2 text-xs font-bold" role="group" aria-label="Language">
+        <a
+          href="/"
+          hreflang="ko"
+          aria-label="한국어"
+          aria-current={!isEn ? "page" : undefined}
+          class={`flex-1 px-3 py-2 rounded text-center ${!isEn ? "bg-stone-900 text-white" : "bg-stone-100 text-stone-700"}`}
+        >KO</a>
+        <a
+          href="/en/"
+          hreflang="en"
+          aria-label="English"
+          aria-current={isEn ? "page" : undefined}
+          class={`flex-1 px-3 py-2 rounded text-center ${isEn ? "bg-stone-900 text-white" : "bg-stone-100 text-stone-700"}`}
+        >EN</a>
       </div>
       <a
         href={`tel:${site.phone}`}

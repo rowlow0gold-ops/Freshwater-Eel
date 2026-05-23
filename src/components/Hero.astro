@@ -23,7 +23,9 @@ const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
     </div>
   )}
 
-  <!-- Multiple Pexels videos rotated every 10s (data-hero-video / data-interval) -->
+  <!-- Hero background — videos on desktop (≥768px), single image on mobile.
+       Mobile skips ~15MB of MP4 by never matching the source media query,
+       which is the single biggest mobile perf win on this page. -->
   <div
     class="absolute inset-0 overflow-hidden"
     data-hero-rotator
@@ -31,6 +33,16 @@ const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
   >
     <!-- Solid black behind videos so non-loaded ones don't bleed through -->
     <div class="absolute inset-0 bg-stone-950"></div>
+
+    <!-- Mobile fallback: static hero image. Hidden on md+ where videos take over. -->
+    <img
+      src={site.hero.bgImage}
+      alt=""
+      aria-hidden="true"
+      fetchpriority="high"
+      decoding="async"
+      class="md:hidden absolute inset-0 w-full h-full object-cover"
+    />
 
     {videos.map((url, i) => (
       <video
@@ -40,13 +52,13 @@ const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
         muted
         playsinline
         preload={i === 0 ? "auto" : "none"}
-        {/* Non-first videos are lazy-loaded by the rotator JS shortly before they play,
-            so the initial page weight isn't ~10MB of background video. */}
-        class={`absolute inset-0 w-full h-full object-cover ${
+        {/* The `media` attr on <source> means mobile browsers never even
+            request the file when the query doesn't match. */}
+        class={`hidden md:block absolute inset-0 w-full h-full object-cover ${
           i === 0 ? "opacity-100" : "opacity-0"
         }`}
       >
-        <source src={url} type="video/mp4" />
+        <source media="(min-width: 768px)" src={url} type="video/mp4" />
       </video>
     ))}
 

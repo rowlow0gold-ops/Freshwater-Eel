@@ -228,6 +228,12 @@ function initPopup() {
 function initHeroVideoRotator() {
   const rotator = document.querySelector<HTMLElement>("[data-hero-rotator]");
   if (!rotator) return;
+  // On mobile we serve the hero as a static image and the videos render with
+  // `hidden md:block`; abort here so we don't trigger network requests for
+  // ~15MB of MP4 the user will never see.
+  if (typeof window.matchMedia === "function" && !window.matchMedia("(min-width: 768px)").matches) {
+    return;
+  }
   const videos = Array.from(rotator.querySelectorAll<HTMLVideoElement>("[data-hero-video]"));
   if (videos.length < 2) return;
 

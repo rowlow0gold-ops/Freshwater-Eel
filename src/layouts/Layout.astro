@@ -3,6 +3,7 @@ import "../styles/global.css";
 import siteKo from "../data/site.json";
 import siteEn from "../data/en/site.json";
 import DemoBanner from "../components/DemoBanner.astro";
+import { pexelsSrc } from "../lib/pexels";
 
 interface Props {
   title?: string;
@@ -30,13 +31,15 @@ const pageDescription = description ?? site.description;
 const defaultOgImage = "https://images.pexels.com/photos/16569756/pexels-photo-16569756.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop";
 const ogImageUrl = ogImage ?? defaultOgImage;
 
-// LCP optimization: the first hero image is what the browser eventually paints
-// as the largest element on mobile. Telling the browser to preload it (and
-// only the mobile-sized variant via imagesrcset+media) shaves ~400ms off LCP
-// since the request fires in the head instead of after HTML parse.
-const lcpImageBase = "https://images.pexels.com/photos/16569756/pexels-photo-16569756.jpeg";
-const lcpImage480 = `${lcpImageBase}?auto=compress&cs=tinysrgb&w=480`;
-const lcpImage800 = `${lcpImageBase}?auto=compress&cs=tinysrgb&w=800`;
+// LCP optimization: the first hero image is what the browser paints as the
+// largest element on mobile. Preload it from <head> so the fetch starts
+// before HTML parse. CRITICAL: the URL has to match the actual <img> src
+// byte-for-byte (same query params) or the browser does two separate
+// fetches instead of reusing the preload — which is worse than no preload.
+// We use the same pexelsSrc() helper Hero.astro uses, so they always match.
+const lcpHeroBase = (site.hero as any).bgImages?.[0] ?? site.hero.bgImage;
+const lcpImage480 = pexelsSrc(lcpHeroBase, 480);
+const lcpImage800 = pexelsSrc(lcpHeroBase, 800);
 
 // hreflang siblings.
 const koHref = `${origin}/`;

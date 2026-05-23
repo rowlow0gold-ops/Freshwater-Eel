@@ -10,6 +10,9 @@ const site = lang === "en" ? siteEn : siteKo;
 const videos: string[] = Array.isArray((site.hero as any).bgVideos)
   ? (site.hero as any).bgVideos
   : [];
+const heroImages: string[] = Array.isArray((site.hero as any).bgImages) && (site.hero as any).bgImages.length > 0
+  ? (site.hero as any).bgImages
+  : [site.hero.bgImage];
 const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
 ---
 
@@ -24,9 +27,11 @@ const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
     </div>
   )}
 
-  <!-- Hero background — videos on desktop (≥768px), single image on mobile.
-       Mobile skips ~15MB of MP4 by never matching the source media query,
-       which is the single biggest mobile perf win on this page. -->
+  <!-- Hero background — videos on desktop (≥768px), rotating images on mobile.
+       Mobile never loads the MP4s (media query on <source>), and instead gets
+       a cross-fade between bgImages at the same cadence. Cheaper than video
+       on mobile data, and visually closer to industry standard for Korean
+       franchise sites. -->
   <div
     class="absolute inset-0 overflow-hidden"
     data-hero-rotator
@@ -35,6 +40,30 @@ const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
     <!-- Solid black behind videos so non-loaded ones don't bleed through -->
     <div class="absolute inset-0 bg-stone-950"></div>
 
+    <!-- Mobile: rotating <img> stack. Hidden on md+ where videos take over. -->
+    <div class="md:hidden absolute inset-0" data-hero-img-rotator data-interval={intervalMs}>
+      {heroImages.map((url, i) => (
+        <img
+          data-hero-img={i}
+          src={i === 0 ? pexelsSrc(url, 800) : undefined}
+          data-src={pexelsSrc(url, 800)}
+          srcset={i === 0 ? pexelsSrcset(url, [480, 800, 1200]) : undefined}
+          data-srcset={pexelsSrcset(url, [480, 800, 1200])}
+          sizes="100vw"
+          alt=""
+          aria-hidden="true"
+          fetchpriority={i === 0 ? "high" : undefined}
+          loading={i === 0 ? "eager" : "lazy"}
+          decoding="async"
+          class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
+            i === 0 ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      ))}
+    </div>
+
+    <!-- Desktop: rotating video stack. Hidden on mobile via the
+         media-attr on <source> (so no fetch happens at all). -->
     {videos.map((url, i) => (
       <video
         data-hero-video={i}
@@ -44,11 +73,11 @@ const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
         playsinline
         preload={i === 0 ? "auto" : "none"}
         poster={i === 0 ? pexelsSrc(site.hero.bgImage, 1200) : undefined}
-        class={`absolute inset-0 w-full h-full object-cover ${
+        class={`hidden md:block absolute inset-0 w-full h-full object-cover ${
           i === 0 ? "opacity-100" : "opacity-0"
         }`}
       >
-        <source src={url} type="video/mp4" />
+        <source media="(min-width: 768px)" src={url} type="video/mp4" />
       </video>
     ))}
 

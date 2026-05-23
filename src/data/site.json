@@ -28,6 +28,12 @@
     "ctaHref": "tel:1577-3214",
     "promoBanner": "25호점 한정 신규창업 · 업종변경 파격혜택 프로모션 진행중",
     "bgImage": "https://images.pexels.com/photos/16569756/pexels-photo-16569756.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1200&fit=crop",
+    "bgImages": [
+      "https://images.pexels.com/photos/16569756/pexels-photo-16569756.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1200&fit=crop",
+      "https://images.pexels.com/photos/16569755/pexels-photo-16569755.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1200&fit=crop",
+      "https://images.pexels.com/photos/19981737/pexels-photo-19981737.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1200&fit=crop",
+      "https://images.pexels.com/photos/16569754/pexels-photo-16569754.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1200&fit=crop"
+    ],
     "bgVideoIntervalMs": 10000,
     "bgVideos": [
       "https://videos.pexels.com/video-files/4328587/4328587-sd_960_540_30fps.mp4",

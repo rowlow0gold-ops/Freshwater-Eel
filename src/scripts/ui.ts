@@ -229,9 +229,69 @@ function initPopup() {
   });
 }
 
+/**
+ * Hero image rotator — runs on mobile (<768px). Cross-fades between the
+ * bgImages list at the same interval as the desktop video rotator.
+ * Lazy `<img>` elements have `data-src` / `data-srcset` and only swap into
+ * real `src` / `srcset` ~3s after window.load, so the initial paint only
+ * pays for the first image.
+ */
+function initHeroImageRotator() {
+  // Skip on desktop — videos handle the hero there.
+  if (typeof window.matchMedia === "function" && window.matchMedia("(min-width: 768px)").matches) {
+    return;
+  }
+  const wrap = document.querySelector<HTMLElement>("[data-hero-img-rotator]");
+  if (!wrap) return;
+  const imgs = Array.from(wrap.querySelectorAll<HTMLImageElement>("[data-hero-img]"));
+  if (imgs.length < 2) return;
+
+  const interval = Number(wrap.dataset.interval || "10000");
+
+  // Promote a lazy img (i>0) to its real src/srcset so it can fade in.
+  const promote = (img: HTMLImageElement) => {
+    const src = img.dataset.src;
+    const srcset = img.dataset.srcset;
+    if (src && !img.src) img.src = src;
+    if (srcset && !img.srcset) img.srcset = srcset;
+  };
+
+  // Pre-warm the next image a little after page load so the first
+  // transition isn't a blank frame.
+  const w = window as any;
+  const schedule = (cb: () => void, delay: number) => {
+    if (typeof w.requestIdleCallback === "function") {
+      w.requestIdleCallback(() => setTimeout(cb, delay));
+    } else {
+      setTimeout(cb, delay);
+    }
+  };
+  schedule(() => promote(imgs[1]), 2500);
+
+  let current = 0;
+  setInterval(() => {
+    const next = (current + 1) % imgs.length;
+    // Make sure the upcoming image has its real src before we fade to it.
+    promote(imgs[next]);
+    // Warm up the one after that for the next cycle.
+    const peek = (next + 1) % imgs.length;
+    if (peek !== 0) promote(imgs[peek]);
+
+    imgs[next].classList.remove("opacity-0");
+    imgs[next].classList.add("opacity-100");
+    imgs[current].classList.remove("opacity-100");
+    imgs[current].classList.add("opacity-0");
+    current = next;
+  }, interval);
+}
+
 function initHeroVideoRotator() {
   const rotator = document.querySelector<HTMLElement>("[data-hero-rotator]");
   if (!rotator) return;
+  // Video rotator only on desktop. Mobile uses the image rotator above.
+  if (typeof window.matchMedia === "function" && !window.matchMedia("(min-width: 768px)").matches) {
+    return;
+  }
   const videos = Array.from(rotator.querySelectorAll<HTMLVideoElement>("[data-hero-video]"));
   if (videos.length < 2) return;
 
@@ -517,6 +577,7 @@ function initLazy() {
   initCountUp();
   initParallax();
   initHeroVideoRotator();
+  initHeroImageRotator();
   initLazyBackgrounds();
 }
 

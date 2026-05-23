@@ -35,19 +35,6 @@ const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
     <!-- Solid black behind videos so non-loaded ones don't bleed through -->
     <div class="absolute inset-0 bg-stone-950"></div>
 
-    <!-- Mobile fallback: static hero image. Hidden on md+ where videos take over.
-         Served at 800w (mobile-appropriate) with a small srcset so 2x phones get 1200w. -->
-    <img
-      src={pexelsSrc(site.hero.bgImage, 800)}
-      srcset={pexelsSrcset(site.hero.bgImage, [480, 800, 1200])}
-      sizes="100vw"
-      alt=""
-      aria-hidden="true"
-      fetchpriority="high"
-      decoding="async"
-      class="md:hidden absolute inset-0 w-full h-full object-cover"
-    />
-
     {videos.map((url, i) => (
       <video
         data-hero-video={i}
@@ -56,13 +43,12 @@ const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
         muted
         playsinline
         preload={i === 0 ? "auto" : "none"}
-        {/* The `media` attr on <source> means mobile browsers never even
-            request the file when the query doesn't match. */}
-        class={`hidden md:block absolute inset-0 w-full h-full object-cover ${
+        poster={i === 0 ? pexelsSrc(site.hero.bgImage, 1200) : undefined}
+        class={`absolute inset-0 w-full h-full object-cover ${
           i === 0 ? "opacity-100" : "opacity-0"
         }`}
       >
-        <source media="(min-width: 768px)" src={url} type="video/mp4" />
+        <source src={url} type="video/mp4" />
       </video>
     ))}
 

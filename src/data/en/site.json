@@ -30,10 +30,10 @@
     "bgImage": "https://images.pexels.com/photos/16569756/pexels-photo-16569756.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1200&fit=crop",
     "bgVideoIntervalMs": 10000,
     "bgVideos": [
-      "https://videos.pexels.com/video-files/34029351/14433062_1920_1080_24fps.mp4",
-      "https://videos.pexels.com/video-files/4328587/4328587-uhd_2560_1440_30fps.mp4",
-      "https://videos.pexels.com/video-files/11422269/11422269-uhd_2560_1440_60fps.mp4",
-      "https://videos.pexels.com/video-files/20082249/20082249-uhd_2560_1440_30fps.mp4"
+      "https://videos.pexels.com/video-files/4328587/4328587-sd_960_540_30fps.mp4",
+      "https://videos.pexels.com/video-files/4328587/4328587-hd_1280_720_30fps.mp4",
+      "https://videos.pexels.com/video-files/20082249/20082249-sd_960_540_30fps.mp4",
+      "https://videos.pexels.com/video-files/11422269/11422269-hd_1280_720_60fps.mp4"
     ]
   },
   "brand": {

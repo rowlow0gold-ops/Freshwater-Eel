@@ -19,7 +19,7 @@ const menu = lang === "en" ? menuEn : menuKo;
 
     <div data-menu-tabs class="mt-12">
       <!-- Tab buttons -->
-      <div class="reveal flex flex-wrap justify-center gap-2 md:gap-3 border-b border-stone-200">
+      <div role="tablist" aria-label={menu.title} class="reveal flex flex-wrap justify-center gap-2 md:gap-3 border-b border-stone-200">
         {menu.categories.map((cat) => (
           <button
             type="button"

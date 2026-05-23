@@ -11,7 +11,7 @@
     "title": "원스톱 공급 시스템",
     "subtitle": "본가 직영 양식장 → 손질장 → 콜드체인 → 매장까지 한 사이클로 책임집니다.",
     "items": [
-      { "title": "프리미엄 장어",   "description": "본가 계약 양식장에서만 출하",        "image": "https://images.pexels.com/photos/16569753/pexels-photo-16569753.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" },
+      { "title": "계약 양식장 직출하",   "description": "본가 계약 양식장에서만 출하",        "image": "https://images.pexels.com/photos/16569753/pexels-photo-16569753.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" },
       { "title": "순살 손질 공급", "description": "머리/내장 제거 후 정량 패킹",          "image": "https://images.pexels.com/photos/11444804/pexels-photo-11444804.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" },
       { "title": "안정적 물류",     "description": "오픈 지역 제한제로 공급 안정성 확보", "image": "https://images.pexels.com/photos/16569754/pexels-photo-16569754.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" }
     ]

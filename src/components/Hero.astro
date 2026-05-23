@@ -39,8 +39,9 @@ const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
         loop
         muted
         playsinline
-        preload="auto"
-        {/* No poster — keep solid black bg while the wave videos load, no still photo */}
+        preload={i === 0 ? "auto" : "none"}
+        {/* Non-first videos are lazy-loaded by the rotator JS shortly before they play,
+            so the initial page weight isn't ~10MB of background video. */}
         class={`absolute inset-0 w-full h-full object-cover ${
           i === 0 ? "opacity-100" : "opacity-0"
         }`}

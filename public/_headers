@@ -1,0 +1,14 @@
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+/*.html
+  Content-Type: text/html; charset=UTF-8
+
+/
+  Content-Type: text/html; charset=UTF-8
+
+/en/
+  Content-Type: text/html; charset=UTF-8

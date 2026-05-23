@@ -240,11 +240,36 @@ function initHeroVideoRotator() {
     const markReady = () => ready.add(i);
     v.addEventListener("canplay", markReady, { once: true });
     v.addEventListener("loadeddata", markReady, { once: true });
-    // Force eager load so transitions are seamless
-    try { v.preload = "auto"; v.load(); } catch {}
   });
-  // First video is the visible one — start by assuming it'll be ready
+  // First video is the visible one — already preload="auto" at render time.
   ready.add(0);
+
+  // Progressively preload subsequent videos so the initial page weight stays light
+  // (otherwise ~10MB of background MP4 hits before the hero is even interactive).
+  // Kick off video[1] after the window finishes loading + a short idle gap,
+  // then load each next video as we approach it.
+  const preloadVideo = (idx: number) => {
+    const v = videos[idx];
+    if (!v || v.preload === "auto") return;
+    try { v.preload = "auto"; v.load(); } catch {}
+  };
+  const schedule = (cb: () => void, delay: number) => {
+    const w = window as any;
+    if (typeof w.requestIdleCallback === "function") {
+      w.requestIdleCallback(() => setTimeout(cb, delay));
+    } else {
+      setTimeout(cb, delay);
+    }
+  };
+  const startProgressivePreload = () => {
+    // Stagger so we don't blow the network budget right after page load.
+    videos.forEach((_, i) => {
+      if (i === 0) return;
+      schedule(() => preloadVideo(i), (i - 1) * 1500);
+    });
+  };
+  if (document.readyState === "complete") startProgressivePreload();
+  else window.addEventListener("load", startProgressivePreload, { once: true });
 
   const advance = () => {
     // Find the next video that's ready to play. Skip broken/loading ones.

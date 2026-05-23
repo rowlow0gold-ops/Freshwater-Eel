@@ -59,7 +59,6 @@ const intervalMs: number = (site.hero as any).bgVideoIntervalMs ?? 10000;
         muted
         playsinline
         preload={i === 0 ? "auto" : "none"}
-        poster={i === 0 ? pexelsSrc(site.hero.bgImage, 1200) : undefined}
         class={`hidden md:block absolute inset-0 w-full h-full object-cover ${
           i === 0 ? "opacity-100" : "opacity-0"
         }`}

@@ -10,6 +10,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Demo banner (36px) + header (~60px) so #anchor links don't land hidden behind them. */
+  scroll-padding-top: 96px;
 }
 
 body {

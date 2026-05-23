@@ -1,0 +1,47 @@
+---
+interface Props {
+  lang?: "ko" | "en";
+}
+const { lang = "ko" } = Astro.props;
+const isEn = lang === "en";
+
+// Short label for narrow screens (always one line).
+const short = isEn
+  ? "DEMO — Not a real business"
+  : "DEMO — 실제 매장이 아닙니다";
+
+// Full message for >= sm screens.
+const full = isEn
+  ? "DEMO SITE — Portfolio sample. Real orders / inquiries are not processed."
+  : "DEMO SITE — 포트폴리오 샘플입니다. 실제 주문·문의는 접수되지 않습니다.";
+---
+
+<div
+  role="alert"
+  aria-label={full}
+  class="demo-banner sticky top-0 z-50 w-full h-9 bg-amber-400 text-stone-900 border-b border-amber-600 flex items-center"
+>
+  <div class="mx-auto max-w-7xl w-full px-3 flex items-center justify-center gap-2">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="shrink-0"
+      aria-hidden="true"
+    >
+      <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/>
+      <line x1="12" y1="9" x2="12" y2="13"/>
+      <line x1="12" y1="17" x2="12.01" y2="17"/>
+    </svg>
+    <p class="text-[11px] sm:text-xs font-bold tracking-wide whitespace-nowrap truncate">
+      <span class="sm:hidden">{short}</span>
+      <span class="hidden sm:inline">{full}</span>
+    </p>
+  </div>
+</div>

@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import siteKo from "../data/site.json";
 import siteEn from "../data/en/site.json";
+import DemoBanner from "../components/DemoBanner.astro";
 
 interface Props {
   title?: string;
@@ -117,6 +118,7 @@ const googleVerify = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || "";
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="bg-white text-stone-900 antialiased">
+    <DemoBanner lang={lang} />
     <slot />
     <script>
       import "../scripts/ui.ts";
